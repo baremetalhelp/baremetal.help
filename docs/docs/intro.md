@@ -2,46 +2,56 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# About BareMetal Tutorials
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Here are some tutorials for bringing up cloud infrastructure from "bare metal." We assume very little. The focus here is Amazon Web Services, AWS.
 
-## Getting Started
+For example, to create a Single Sign-On integration in AWS, we do not assume you have an organization, an existing SSO integration, or a directory set up for users and groups.
 
-Get started by **creating a new site**.
+We're clear about any assumptions and we always show you how to prepare for each tutorial. For example, to create a CDN we show you how to register a domain in the AWS console. And for setting up email for your domain, we show you all the things you need to take care of.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Each tutorial includes infrastructure-as-code for deploying the tutorial's resources, written in CDK [link]. CDK has "stacks" as a
+fundamental. There's at least one stack for every tutorial.
 
-### What you'll need
+That means you can run the CDK to create the infrastructure in each tutorial without going through every detail. You might regret that
+when things go wrong or you want to know how to use it. 
 
-- [Node.js](https://nodejs.org/en/download/) version 14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## The BareMetal tutorials
 
-## Generate a new site
+### Content Delivery Network, CDN
 
-Generate a new Docusaurus site using the **classic template**.
+You use a CDN for delivering content like images from edge locations all over the world. A CDN is a cache. You define where the originals live and any configuration you need for different types of content.
 
-The classic template will automatically be added to your project after you run the command:
+## Nothing special
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+There's already so much great documentation for all of the resources you can create in the public cloud. We don't duplicate it, preferring
+to link to relevant documentation along the way.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+What we _do_ provide, however, is infrastructure-as-code for all tutorials that shares common configuration and written in a way so
+you can pick and chose what you want. The common configuration means that all your BareMetal stacks are consistent and compatible.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+We make it super clear when there are dependencies on other tutorials.
 
-## Start your site
+## Overall assumptions
 
-Run the development server:
+1. You have an AWS account with a privileged IAM user [link].
+1. You have credentials for that user [link].
+1. You have cloned this repo [link].
+1. You have the CDK CLI installed [link].
 
-```bash
-cd my-website
-npm run start
-```
+## Verify your setup
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+Blah.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+## Shared configuration
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Blah.
+
+## Running infra-as-code
+
+Blah.
+
+## TODO
+
+- Make configuration fields optional and handle it
+- All the links

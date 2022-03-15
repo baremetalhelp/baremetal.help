@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Template, Match } from 'aws-cdk-lib/assertions';
-import * as BaremetalHelp from '../lib/baremetal.help-stack';
+import * as BaremetalHelp from '../lib/stacks/ssl-cert-stack';
 
 test('SQS Queue and SNS Topic Created', () => {
   const app = new cdk.App();
