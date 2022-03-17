@@ -34,12 +34,12 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: "Some Examples",
+    title: "Make These and More",
     Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
     description: (
       <>
         AWS Single Sign-On, Azure AD directory, super-duper documentation like
-        this, ...
+        this, Content Delivery Network.
       </>
     ),
   },

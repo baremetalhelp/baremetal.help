@@ -627,6 +627,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@udondan/common-substrings@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@udondan/common-substrings/-/common-substrings-3.0.2.tgz#22e90b6d4eaa640e491badee9ae678a3372c572b"
+  integrity sha512-Sc8lNnubj2NtH6zj13K8ADohTnwvXBSp6NWV0LDvia/xfIGHvOhKOHjL7AM9+5lVL3LcIHl85mwpn9LYYhyxuw==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -969,6 +974,19 @@ case@1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/case/-/case-1.6.3.tgz#0a4386e3e9825351ca2e6216c60467ff5f1ea1c9"
   integrity sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==
+
+cdk-constants@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/cdk-constants/-/cdk-constants-3.0.3.tgz#ec7782c2178246f90cd762d2c950d3fce0ef56de"
+  integrity sha512-tenkBG3XUQaiT6LCj0cjNhnhSAAiD697oamwXIzZc9JSwg1dqIPUgzFgAzqjuGolBNsqKO8cefsDZm8Aqm/U4Q==
+
+cdk-iam-floyd@^0.338.0:
+  version "0.338.0"
+  resolved "https://registry.yarnpkg.com/cdk-iam-floyd/-/cdk-iam-floyd-0.338.0.tgz#9cbc129ddfeb8757807383124df15d16e9d381ac"
+  integrity sha512-8eWpky7M9Imwi8IPH4yOBqlnVQ4fSDrO2sFFzWjy/ybS51J7dWrciXkIzhemJStE+cJ0HnpGcwmTDzFO92C9tg==
+  dependencies:
+    "@udondan/common-substrings" "^3.0.2"
+    regex-parser "^2.2.11"
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -2838,6 +2856,11 @@ regex-not@^1.0.0, regex-not@^1.0.2:
   dependencies:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
+
+regex-parser@^2.2.11:
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/regex-parser/-/regex-parser-2.2.11.tgz#3b37ec9049e19479806e878cabe7c1ca83ccfe58"
+  integrity sha512-jbD/FT0+9MBU2XAZluI7w2OBs1RBi6p9M83nkoZayQXXU9e8Robt69FcZc7wU4eJD/YFTjn1JdCk3rbMJajz8Q==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"

@@ -7,14 +7,15 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: "BareMetal Help",
-    tagline: '"Zero to Hero" for enterprise-grade cloud infrastructure',
+    tagline: 'Zero to Hero for enterprise-grade cloud infrastructure',
     url: "https://baremetal.help",
     baseUrl: "/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
-    organizationName: "baremetal.help", // Usually your GitHub org/user name.
-    projectName: "docusaurus", // Usually your repo name.
+    organizationName: "baremetalhelp", // Usually your GitHub org/user name.
+    projectName: "baremetal.help", // Usually your repo name.
+    trailingSlash: false,
 
     presets: [
         [
@@ -40,7 +41,7 @@ const config = {
             title: "BareMetal Help",
             logo: {
                 alt: "My Site Logo",
-                src: "img/logo.svg",
+                src: "img/logo.png",
             },
             items: [{
                     type: "doc",
@@ -72,7 +73,7 @@ const config = {
                     }, ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus.`,
+            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, stephen@baremetal.help`,
         },
         prism: {
             theme: lightCodeTheme,

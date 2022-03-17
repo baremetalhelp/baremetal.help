@@ -21,6 +21,8 @@
     },
     "dependencies": {
         "aws-cdk-lib": "2.16.0",
+        "cdk-constants": "^3.0.3",
+        "cdk-iam-floyd": "^0.338.0",
         "constructs": "^10.0.0"
     }
 }

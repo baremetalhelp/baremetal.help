@@ -4,6 +4,12 @@ sidebar_position: 1
 
 # About BareMetal Tutorials
 
+:::info
+Clone the GitHub repo for this site, https://github.com/baremetalhelp/baremetal.help 
+
+You're going to need this repo to run any of the code we wrote for the BareMetal Tutorials
+:::
+
 Here are some tutorials for bringing up cloud infrastructure from "bare metal." We assume very little. The focus here is Amazon Web Services, AWS.
 
 For example, to create a Single Sign-On integration in AWS, we do not assume you have an organization, an existing SSO integration, or a directory set up for users and groups.
@@ -21,6 +27,18 @@ when things go wrong or you want to know how to use it.
 ### Content Delivery Network, CDN
 
 You use a CDN for delivering content like images from edge locations all over the world. A CDN is a cache. You define where the originals live and any configuration you need for different types of content.
+
+### A documentation website
+
+Using Markdown [link] and a few tools, you'll be able to create a website just like this from BareMetal. We have infra-as-code for setting up free hosting on GitHub Pages [link]. You can deploy the documentation at your apex domain, just like we did here at https://baremetal.help . We have GitHub Actions [link] for deploying documentation updates automatically.
+
+### Single Sign-On, SSO
+
+We show how to build an enterprise-grade Single Sign-On infrastructure from scratch. You'll use a user/group directory on Azure AD and an SSO implementation on AWS that connects to it.
+
+### Multi-account AWS Organization
+
+ControlTower blah.
 
 ## Nothing special
 

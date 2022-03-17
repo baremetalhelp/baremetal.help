@@ -10,7 +10,7 @@ CDNs cache too. So you only need to copy the original to one place and the CDN t
 
 ## Assumptions
 
-See the general assumptions in "About BareMetal tutorials".
+See the general assumptions in "About BareMetal Tutorials".
 
 In addition
 1. You registered a domain (strongly recommended) [link].
@@ -30,7 +30,7 @@ In this repo [link],
 cdk ls
 ```
 
-`BareMetalCDN` is the stack for this tutorial.
+`BareMetalCdn` is the stack for this tutorial.
 
 ## Configuration
 
