@@ -8,18 +8,27 @@ import {
   PhysicalResourceIdReference,
 } from "aws-cdk-lib/custom-resources";
 import { ManagedPolicies, ServicePrincipals } from "cdk-constants";
-import { Iam, Organizations } from "cdk-iam-floyd";
 import { Construct } from "constructs";
 
-export interface AwsOrganizationsCustomResourceProps extends StackProps {}
+export interface AwsOrganizationsOrgUnitCustomResourceProps extends StackProps {
+  parentId: string;
+  name: string;
+}
 
-export class AwsOrganizationsCustomResource extends Construct {
+export class AwsOrganizationsOrgUnitCustomResource extends Construct {
+  readonly organizationalUnitId: string;
+
   constructor(
     scope: Construct,
     id: string,
-    props?: AwsOrganizationsCustomResourceProps
+    props: AwsOrganizationsOrgUnitCustomResourceProps
   ) {
     super(scope, id);
+
+    const { name, parentId } = props;
+
+    // const client = new Organizations();
+    // client.create;
 
     const { account } = Stack.of(this);
     const role = new Role(this, "lambda-role", {
@@ -30,33 +39,43 @@ export class AwsOrganizationsCustomResource extends Construct {
         ),
       ],
     });
-    // TBD: narrow
-    //
-    const policy = AwsCustomResourcePolicy.fromStatements([
-      new Organizations().allow().allActions().onAllResources(),
-      new Iam().allow().allActions().onAllResources(),
-    ]);
+    role.roleArn;
     const onCreate: AwsSdkCall = {
       service: "Organizations",
-      action: "createOrganization",
-      physicalResourceId: PhysicalResourceId.of(account),
-      parameters: {},
+      action: "createOrganizationalUnit",
+      parameters: {
+        ParentId: parentId,
+        Name: name,
+      },
+      physicalResourceId: PhysicalResourceId.fromResponse(
+        "OrganizationalUnit.Id"
+      ),
     };
     const onDelete: AwsSdkCall = {
       service: "Organizations",
-      action: "deleteOrganization",
-      parameters: {},
+      action: "deleteOrganizationalUnit",
+      parameters: {
+        OrganizationalUnitId: new PhysicalResourceIdReference(),
+      },
     };
+    const policy = AwsCustomResourcePolicy.fromSdkCalls({
+      resources: AwsCustomResourcePolicy.ANY_RESOURCE,
+    });
+
     const customResource = new AwsCustomResource(
       this,
-      `${id}-organization-resource`,
+      `${id}-organization-unit-resource`,
       {
         onCreate,
         onDelete,
         policy,
         role,
-        resourceType: "Custom::BareMetalOrganization",
+        resourceType: "Custom::BareMetalOrganizationUnit",
       }
+    );
+
+    this.organizationalUnitId = customResource.getResponseField(
+      "OrganizationalUnit.Id"
     );
   }
 }

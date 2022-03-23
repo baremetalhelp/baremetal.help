@@ -29,6 +29,10 @@ export class BareMetalGitHubPagesStack extends Stack {
 
     const { domainName, gitHubUser } = props.bareMetalConfig;
 
+    if (!domainName || !gitHubUser) {
+      throw Error("Documentation website requires both a domain and a GitHub user");
+    }
+
     const hostedZone = HostedZone.fromLookup(this, "hostedzone", {
       domainName,
     });

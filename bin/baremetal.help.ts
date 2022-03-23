@@ -1,22 +1,29 @@
 #!/usr/bin/env node
 import { App, Environment } from "aws-cdk-lib";
 import { BareMetalConfig } from "../lib/model";
-import { BareMetalAwsOrganizationStack } from "../lib/stacks/baremetal-aws-organization-stack";
-import { BareMetalCdnStack } from "../lib/stacks/baremetal-cdn-stack";
-import { BareMetalGitHubPagesStack } from "../lib/stacks/baremetal-github-pages-stack";
+import {
+  BareMetalAwsOrganizationStack,
+  BareMetalCdnStack,
+  BareMetalGitHubPagesStack,
+  BareMetalPermissionSetsStack
+} from "../lib/stacks";
 
 const tags = {
   repo: "https://github.com/baremetalhelp/baremetal.help",
   owner: "tech@baremetal.help",
   status: "dev",
   description:
-    "Infra-as-Code and documentation for a robust cloud-native foundation for the enterprise",
+    "Infra-as-Code and documentation for a robust cloud-native foundation for your enterprise",
 };
 const env: Environment = {
   account: process.env.CDK_DEFAULT_ACCOUNT,
   region: process.env.CDK_DEFAULT_REGION,
 };
+
 const bareMetalConfig: BareMetalConfig = {
+  organizationId: "o-rh5uzhk4d7",
+  rootOuId: 'r-s40u',
+  ssoInstanceArn: "arn:aws:sso:::instance/ssoins-722394f61090d7d4",
   domainName: "baremetal.help",
   cdnEndpoint: "cdn.baremetal.help",
   gitHubUser: "baremetalhelp",
@@ -33,6 +40,12 @@ new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", {
 });
 
 new BareMetalAwsOrganizationStack(app, "BareMetalAwsOrganization", {
+  env,
+  tags,
+  bareMetalConfig,
+});
+
+new BareMetalPermissionSetsStack(app, "BareMetalPermissionSets", {
   env,
   tags,
   bareMetalConfig,

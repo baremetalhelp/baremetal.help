@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 1
 ---
 
-# BareMetal SSO
+# I Can Follow Instructions
 
 It isn't possible to enable and configure AWS Single Sign-On using infrastructure-as-code: The AWS SDK simply
 does not provide access.

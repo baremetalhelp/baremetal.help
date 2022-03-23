@@ -38,8 +38,8 @@ const FeatureList: FeatureItem[] = [
     Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
     description: (
       <>
-        AWS Single Sign-On, Azure AD directory, super-duper documentation like
-        this, Content Delivery Network.
+        AWS Single Sign-On, Azure AD directory, a super-duper documentation
+        website like this, Content Delivery Network.
       </>
     ),
   },

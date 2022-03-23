@@ -22,6 +22,10 @@ export class BareMetalCdnStack extends Stack {
 
     const { domainName, cdnEndpoint } = props.bareMetalConfig;
 
+    if (!domainName || !cdnEndpoint) {
+      throw Error("CDN requires both a domain and a CDN endpoint");
+    }
+
     const hostedZone = HostedZone.fromLookup(this, "hosted-zone", {
       domainName,
     });
