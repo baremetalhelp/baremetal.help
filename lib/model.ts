@@ -1,4 +1,3 @@
-import { IManagedPolicy } from "aws-cdk-lib/aws-iam";
 import { PolicyStatement } from "cdk-iam-floyd";
 
 export interface BareMetalConfig {

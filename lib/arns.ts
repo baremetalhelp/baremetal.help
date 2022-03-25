@@ -1,5 +1,6 @@
 // Monstrous hack. We use side effects of the awesome cdk-iam-floyd library
 // to generate legal ARNs because the patterns are built in.
+//
 // This really needs to be a separate library that both this code and
 // cdk-iam-floyd can call.
 //
@@ -14,8 +15,8 @@ export function s3BucketArn(bucketName: string) {
 }
 
 export function organizationArn(
-  masterAccountId: string,
-  organizationId: string
+  masterAccountId: string = '*',
+  organizationId: string = '*'
 ) {
   return resourceFor(
     new Organizations().onOrganization(masterAccountId, organizationId)
@@ -26,3 +27,6 @@ console.log(new S3().toCreateBucket().onBucket("xyz").toJSON());
 console.log(
   new Organizations().toAttachPolicy().onOrganization("foo", "bar").toJSON()
 );
+console.log(organizationArn())
+console.log(organizationArn('foo'))
+console.log(organizationArn('foo', 'bar'))

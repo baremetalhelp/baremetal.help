@@ -2,8 +2,7 @@ import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as fs from "fs";
 import * as yaml from "js-yaml";
-import { v4 as uuidv4 } from "uuid";
-import { AwsOrganizationsOrgUnitCustomResource } from "../custom-resources";
+import { AwsOrganizationsOrgUnitCustomResource, AwsOrganizationsOrgUnitCustomResource2 } from "../custom-resources";
 import { BareMetalConfig } from "../model";
 
 export interface AwsOrganizationStackProps extends StackProps {
@@ -34,13 +33,13 @@ export class BareMetalAwsOrganizationStack extends Stack {
     ) {
       console.log(parentId, "->", name);
 
-      return new AwsOrganizationsOrgUnitCustomResource(
+      return new AwsOrganizationsOrgUnitCustomResource2(
         scope,
-        // `ou-${path}-${uuidv4()}`, // parentId is not resolved until deploy, of course
-        `ou-${path}}`, // parentId is not resolved until deploy, of course
+        // `ou-${path}-${uuidv4()}`,
+        `ou-${path}`,
         {
-          parentId,
-          name,
+          ParentId: parentId,
+          Name: name,
         }
       );
     }
@@ -71,6 +70,25 @@ export class BareMetalAwsOrganizationStack extends Stack {
       }
     }
 
-    traverseOuTree(this, rootOuId, "ROOT", orgTree["ROOT"]);
+    // traverseOuTree(this, rootOuId, "ROOT", orgTree["ROOT"]);
+
+    const ou1 = new AwsOrganizationsOrgUnitCustomResource(this, `ou-one`, {
+      ParentId: 'ou-s40u-0kq0opas',
+      Name: "ONE",
+    });
+
+    const ou2 = new AwsOrganizationsOrgUnitCustomResource(this, `ou-two`, {
+      ParentId: 'ou-s40u-0kq0opas',
+      Name: "TWO",
+    });
+
+    const ou3 = new AwsOrganizationsOrgUnitCustomResource(this, `ou-three`, {
+      ParentId: rootOuId,
+      Name: "THREE",
+    });
+    const ou4 = new AwsOrganizationsOrgUnitCustomResource(this, `ou-four`, {
+      ParentId: rootOuId,
+      Name: "FOUR",
+    });
   }
 }

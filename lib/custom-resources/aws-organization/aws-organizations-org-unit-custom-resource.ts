@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "aws-cdk-lib";
+import { StackProps } from "aws-cdk-lib";
 import { ManagedPolicy, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 import {
   AwsCustomResource,
@@ -11,8 +11,8 @@ import { ManagedPolicies, ServicePrincipals } from "cdk-constants";
 import { Construct } from "constructs";
 
 export interface AwsOrganizationsOrgUnitCustomResourceProps extends StackProps {
-  parentId: string;
-  name: string;
+  ParentId: string;
+  Name: string;
 }
 
 export class AwsOrganizationsOrgUnitCustomResource extends Construct {
@@ -25,12 +25,11 @@ export class AwsOrganizationsOrgUnitCustomResource extends Construct {
   ) {
     super(scope, id);
 
-    const { name, parentId } = props;
+    const { Name, ParentId } = props;
 
     // const client = new Organizations();
-    // client.create;
+    // client.
 
-    const { account } = Stack.of(this);
     const role = new Role(this, "lambda-role", {
       assumedBy: new ServicePrincipal(ServicePrincipals.LAMBDA),
       managedPolicies: [
@@ -39,13 +38,12 @@ export class AwsOrganizationsOrgUnitCustomResource extends Construct {
         ),
       ],
     });
-    role.roleArn;
     const onCreate: AwsSdkCall = {
       service: "Organizations",
       action: "createOrganizationalUnit",
       parameters: {
-        ParentId: parentId,
-        Name: name,
+        ParentId,
+        Name,
       },
       physicalResourceId: PhysicalResourceId.fromResponse(
         "OrganizationalUnit.Id"

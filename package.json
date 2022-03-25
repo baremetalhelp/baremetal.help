@@ -28,5 +28,10 @@
         "cdk-iam-floyd": "^0.338.0",
         "constructs": "^10.0.0",
         "js-yaml": "^4.1.0"
+    },
+    "prettier": {
+        "semi": true,
+        "singleQuote": false,
+        "tabWidth": 4
     }
 }
