@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Add Permissions to SSO
+# Create AWS Organization
 
 Blah
 

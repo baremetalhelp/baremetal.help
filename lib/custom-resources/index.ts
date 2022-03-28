@@ -1,3 +1,2 @@
-export * from './aws-organization/aws-organizations-custom-resource'
-export * from './aws-organization/aws-organizations-org-unit-custom-resource'
-export * from './aws-organization/aws-organizations-org-unit-custom-resource-2'
+export * from "./aws-organizations/aws-organizations-custom-resource";
+export * from "./aws-organization-unit/aws-organization-unit-custom-resource";

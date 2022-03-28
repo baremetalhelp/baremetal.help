@@ -6,7 +6,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: "BareMetal Help",
+    title: "BareMetal™ Help",
     tagline: 'Zero to Hero for enterprise-grade cloud infrastructure',
     url: "https://baremetal.help",
     baseUrl: "/",
@@ -24,6 +24,7 @@ const config = {
             ({
                 docs: {
                     sidebarPath: require.resolve("./sidebars.js"),
+                    remarkPlugins: [require('mdx-mermaid')],
                     // Please change this to your repo.
                     editUrl: "https://github.com/baremetalhelp/baremetal.help",
                 },

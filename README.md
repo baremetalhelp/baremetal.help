@@ -1,6 +1,6 @@
 # Hey there
 
-Welcome to BareMetal™️ Help. We provide a set of infrastructure-as-code stacks that set up basic infrastructure in AWS. These stacks are tightly integrated and have been developed with best practices and consistent configuration, which makes all resources interoperable.
+Welcome to BareMetal™ Help. We provide a set of infrastructure-as-code stacks that set up basic infrastructure in AWS. These stacks are tightly integrated and have been developed with best practices and consistent configuration, which makes all resources interoperable.
 
 The full documentation's https://baremetal.help .
 
@@ -24,3 +24,7 @@ You'll find references to awesome existing documentation for everything we build
 ## What you don't get
 
 Any applications. We let you deploy your applications on a Kubernetes or AWS' container solution ECS. We have IaC to create a shared container infrastructure if you want it. Or you can copy our code and build it yourself.  
+
+## Navigating this repo
+
+...

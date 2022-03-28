@@ -5,7 +5,7 @@ sidebar_position: 1
 # About BareMetal Tutorials
 
 :::info
-Clone the GitHub repo for this site, https://github.com/baremetalhelp/baremetal.help 
+Clone the GitHub repo for this site, https://github.com/baremetalhelp/baremetal.help
 
 You're going to need this repo to run any of the code we wrote for the BareMetal Tutorials
 :::
@@ -20,15 +20,37 @@ Each tutorial includes infrastructure-as-code for deploying the tutorial's resou
 fundamental. There's at least one stack for every tutorial.
 
 That means you can run the CDK to create the infrastructure in each tutorial without going through every detail. You might regret that
-when things go wrong or you want to know how to use it. 
+when things go wrong or you want to know how to use it.
 
-## The BareMetal tutorials
+## Other approaches
+
+People have been creating Public Cloud infrastructure for as long as it's been around. There are lots of ways to do it. BareMetal is but just one way of many. Here are some examples.
+
+:::warning
+This table is wrong and incomplete. It's also biased heavily on the capabilities of BareMetal rather than things it can't do.
+:::
+
+| Tooling                                                                                                      | Framework? | Infrastructure-as-Code | Data Driven | CI/CD | SSO Landing Zone | SSO Permissions | AWS Organization | AWS Accounts | Data-Driven | GitHub Pages Website | GitHub Integration |
+| ------------------------------------------------------------------------------------------------------------ | ---------- | ---------------------- | ----------- | ----- | ---------------- | --------------- | ---------------- | ------------ | ----------- | -------------------- | ------------------ | --- |
+| [AWS Console, 100% Click-Ops](https://aws.amazon.com/console/)                                               |            |                        |             |       | ✅               | ✅              | ✅               | ✅           |             |                      |                    |
+| [Cloudformation](https://aws.amazon.com/cloudformation/)                                                     |            | ✅                     |             |       | ✅               | ✅              | ✅               | ✅           |             |                      |                    |
+| [AWS CDK](https://aws.amazon.com/cdk/)                                                                       |            | ✅                     |             | ?     | ✅               | ✅              |                  | ✅           |             |                      |                    |
+| [Terraform](https://www.terraform.io)                                                                        |            | ✅                     |             |       | ✅               | ✅              | ✅               | ✅           |             |                      |                    |
+| [aws-bootstrap-kit](https://github.com/awslabs/aws-bootstrap-kit)                                            | ✅         | ✅                     | ✅          |       | ✅               | ✅              |                  |              |             |                      |                    |     |
+| [org-formation](https://github.com/org-formation/org-formation-cli)                                          | ✅         | ✅                     | ✅          | ✅    | ✅               |                 | ✅               | ✅           | ✅          |                      |                    |
+| [BareMetal Help](https://baremetal.help)                                                                     | ✅         | ✅                     | ✅          | ✅    | ✅               | ✅              | ✅               | ✅           | ✅          | ✅                   | ✅                 |
+| [Account Factory for Terraform](https://docs.aws.amazon.com/controltower/latest/userguide/aft-overview.html) | ✅         | ✅                     | ✅          | ?     | ✅               |                 | ✅               | ✅           | ?           |                      |                    |
+
+## Available BareMetal tutorials
+
+We're adding more all the time. So please check back often to see what's new.
+–—
 
 ### Content Delivery Network, CDN
 
 You use a CDN for delivering content like images from edge locations all over the world. A CDN is a cache. You define where the originals live and any configuration you need for different types of content.
 
-### A documentation website
+### A documentation website like this
 
 Using Markdown [link] and a few tools, you'll be able to create a website just like this from BareMetal. We have infra-as-code for setting up free hosting on GitHub Pages [link]. You can deploy the documentation at your apex domain, just like we did here at https://baremetal.help . We have GitHub Actions [link] for deploying documentation updates automatically.
 
@@ -45,7 +67,7 @@ ControlTower blah.
 There's already so much great documentation for all of the resources you can create in the public cloud. We don't duplicate it, preferring
 to link to relevant documentation along the way.
 
-What we _do_ provide, however, is infrastructure-as-code for all tutorials that shares common configuration and written in a way so
+What we _do_ provide, however, is infrastructure-as-code stacks for all tutorials that share common configuration and written in a way so
 you can pick and chose what you want. The common configuration means that all your BareMetal stacks are consistent and compatible.
 
 We make it super clear when there are dependencies on other tutorials.
@@ -71,5 +93,9 @@ Blah.
 
 ## TODO
 
-- Make configuration fields optional and handle it
-- All the links
+-   Make configuration fields optional and handle it
+-   All the links
+
+:::note
+BareMetal is not really a trademark.
+:::
