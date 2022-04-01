@@ -1,6 +1,6 @@
 # Hey there
 
-Welcome to BareMetal™ Help. We provide a set of infrastructure-as-code stacks that set up basic infrastructure in AWS. These stacks are tightly integrated and have been developed with best practices and consistent configuration, which makes all resources interoperable.
+Welcome to BareMetal Help. We provide a set of infrastructure-as-code stacks that set up basic infrastructure in AWS. These stacks are tightly integrated and have been developed with best practices and consistent configuration, which makes all resources interoperable.
 
 The full documentation's https://baremetal.help .
 

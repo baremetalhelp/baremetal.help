@@ -6,12 +6,11 @@ import {
     CfnPermissionSetProps,
 } from "aws-cdk-lib/aws-sso";
 import { Construct } from "constructs";
-import { BareMetalConfig, PermissionSetConfig } from "../model";
-import { landingZoneConfig } from "../config/landing-zone-config";
+import { landingZoneConfig } from "../../config/landing-zone-config";
+import { bareMetalConfig } from "../../config/common-config";
+import { PermissionSetConfig } from "../model";
 
-export interface BareMetalLandingZoneStackProps extends StackProps {
-    bareMetalConfig: BareMetalConfig;
-}
+export interface BareMetalLandingZoneStackProps extends StackProps {}
 
 function permissionSetFromConfig(
     scope: Construct,

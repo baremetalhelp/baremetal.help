@@ -1,11 +1,11 @@
 import { ManagedPolicies } from "cdk-constants";
 import { S3 } from "cdk-iam-floyd";
-import { PermissionSetConfig } from "../model";
+import { PermissionSetConfig } from "../lib/model";
 import {
     adminPermissionSetConfig,
     developerPermissionSetConfig,
     readOnlyPermissionSetConfig,
-} from "./permission-sets";
+} from "../lib/config/permission-sets";
 
 export enum Account {
     BILLING_ACCOUNT = "825617765789",

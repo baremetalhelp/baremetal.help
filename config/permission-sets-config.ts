@@ -1,7 +1,7 @@
 import { ManagedPolicies } from "cdk-constants";
-import { PermissionSetConfig } from "../model";
+import { PermissionSetConfig } from "../lib/model";
 
-// Can't be a nice enum because the values are "computed members"
+// Can't be a nice enum because the values are computed at runtime
 //
 export const adminPermissionSetConfig: PermissionSetConfig = {
     name: "ADMINISTRATOR",

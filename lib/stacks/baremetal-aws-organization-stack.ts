@@ -2,13 +2,10 @@ import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import {
     AwsOrganizationsCustomResource,
-    AwsOrganizationUnitCustomResource,
+    AwsOrganizationUnitCustomResource
 } from "../custom-resources";
-import { BareMetalConfig } from "../model";
 
-export interface AwsOrganizationStackProps extends StackProps {
-    bareMetalConfig: BareMetalConfig;
-}
+export interface AwsOrganizationStackProps extends StackProps {}
 
 export class BareMetalAwsOrganizationStack extends Stack {
     constructor(
@@ -79,10 +76,14 @@ export class BareMetalAwsOrganizationStack extends Stack {
 
         // traverseOuTree(this, rootOuId, "ROOT", orgTree["ROOT"]);
 
-        const ou1 = new AwsOrganizationUnitCustomResource(this, `ou-ONE_TWO_THREE`, {
-            ParentId: organization.rootId,
-            Name: "ONE_TWO_THREE",
-        });
+        const ou1 = new AwsOrganizationUnitCustomResource(
+            this,
+            `ou-ONE_TWO_THREE`,
+            {
+                ParentId: organization.rootId,
+                Name: "ONE_TWO_THREE",
+            }
+        );
 
         // const ou2 = new AwsOrganizationUnitCustomResource(this, `ou-two`, {
         //     ParentId: rootOuId,
@@ -97,8 +98,6 @@ export class BareMetalAwsOrganizationStack extends Stack {
         //     ParentId: rootOuId,
         //     Name: "FOUR",
         // });
-
-     
 
         new CfnOutput(this, "Organization Id", {
             value: organization.id,

@@ -6,7 +6,7 @@ sidebar_position: 3
 
 Single Sign-On provides a way to associate users and groups in the enterprise. Usually, this delegates to something like Active Directory.
 
-But there's another piece that must be implemented that lets users see accounts and permissions one they have signed on. This is done with [AWS Permission Sets](https://docs.aws.amazon.com/singlesignon/latest/userguide/permissionsetsconcept.html). That's what you're going to do now.
+But there's another piece that must be implemented that lets users see accounts and permissions for groups they're in once they sign on. This is done with [AWS Permission Sets](https://docs.aws.amazon.com/singlesignon/latest/userguide/permissionsetsconcept.html). That's what you're going to do now.
 
 Unless you do this bit, users will be able to log in using SSO just fine, but they won't see any available accounts when they do. 
 
@@ -29,9 +29,10 @@ stateDiagram-v2
    accounts --> permission_set_assignments : binds
    permission_sets --> permission_set_assignments : binds
    permission_set_assignments --> landing_zone : configures
-   users --> landing_zone : logs in via SSO
-   note right of permission_set_assignments : You are here
-   note left of landing_zone : You'll make this
+   users --> landing_zone : log in via SSO
+   note left of organization : You are here
+   note left of directory : And here
+   note right of landing_zone : You'll make this
 ```
 
 ## Assumptions
