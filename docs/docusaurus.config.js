@@ -1,13 +1,16 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+// const lightCodeTheme = require("prism-react-renderer/themes/vsLight");
+// const darkCodeTheme = require("prism-react-renderer/themes/vsDark");
+
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: "BareMetal™ Help",
-    tagline: 'Zero to Hero for enterprise-grade cloud infrastructure',
+    tagline: "Zero to Hero for enterprise-grade cloud infrastructure",
     url: "https://baremetal.help",
     baseUrl: "/",
     onBrokenLinks: "throw",
@@ -24,7 +27,7 @@ const config = {
             ({
                 docs: {
                     sidebarPath: require.resolve("./sidebars.js"),
-                    remarkPlugins: [require('mdx-mermaid')],
+                    remarkPlugins: [require("mdx-mermaid")],
                     // Please change this to your repo.
                     editUrl: "https://github.com/baremetalhelp/baremetal.help",
                 },
@@ -53,6 +56,10 @@ const config = {
                 {
                     href: "https://github.com/baremetalhelp/baremetal.help",
                     label: "GitHub",
+                    position: "right",
+                },
+                {
+                    type: "search",
                     position: "right",
                 },
             ],

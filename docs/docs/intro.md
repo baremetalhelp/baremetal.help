@@ -10,7 +10,7 @@ Here are some tutorials for bringing up cloud infrastructure from exactly that, 
 
 For example, to create a Single Sign-On integration in AWS, we do not assume you have an organization, an existing SSO integration, or a directory set up for users and groups. Or even an AWS account. We're clear about any assumptions and we always show you how to prepare for each tutorial. 
 
-## A quick example
+## A Quick Example
 
 We mean it when we say we give you infrastructure-as-code for all the things. Not only that, we imbue them with secure-by-default best practices and convenience you'll like. For example, here's the infra-as-code (this happens to be written in TypeScript using [AWS Cloud Development Kit, CDK](https://aws.amazon.com/cdk/)) for your Content Delivery Network, CDN.
 
@@ -55,54 +55,10 @@ Even if you don't speak CDK or the TypeScript language, you may be able to follo
 - There's just the right SSL certificate with automatic verification that this is for a domain you own via an AWS HostedZone.
 - And we'll let you know in plenty of time _before_ that certificate expires with a custom alert.
 
-## The tutorials
+## The Tutorials
 
 Here's your tutorial path. You'll typically only run the Enterprise Track once. But you can add as many features
 as you like and don't have to do them all at once. 
-
-```mermaid
-stateDiagram-v2
-  direction LR
-  state "Complete Documentation Website" as documentation
-  state "Content Delivery Networks, CDN" as cdn
-  state "AWS Multi-account Organization" as organization
-  state "Landing Zone" as landingzone
-  state "Single Sign-On" as sso
-  state "Hosted CI/CD (GitHub Actions)" as githubactions
-  state "Enterprise Email" as email
-  state "Feature add-ons" as features
-  state "Artifacts Repo" as artifacts
-  state "Features Ready" as featuresend
-  state "Organization CI/CD" as organization_cicd
-  state "Enterprise Ready" as enterprise_ready
-  [*] --> features : Pick and choose
-  [*] --> organization : Run once
-  features --> documentation
-  features --> githubactions
-  features --> cdn
-  features --> artifacts
-  artifacts --> featuresend
-  organization --> organization_cicd
-  organization_cicd --> sso
-  organization_cicd --> email
-  email --> enterprise_ready
-  sso --> landingzone
-  landingzone --> enterprise_ready
-  landingzone --> landing_zone_cicd
-  cdn --> featuresend
-  documentation --> featuresend
-  githubactions --> featuresend
-  landing_zone_cicd --> enterprise_ready
-  enterprise_ready --> [*]
-  featuresend --> [*]
-```
-
-:::note
-Clone the GitHub repo for this site, https://github.com/baremetalhelp/baremetal.help
-
-You're going to need this repo to run any of the code we wrote for the BareMetal Tutorials. This documentation is also in the same repo.
-:::
-
 
 Each tutorial includes infrastructure-as-code for deploying that tutorial's resources, written in AWS CDK. CDK has "stacks" as a
 fundamental that encapsulate a collection of related resources. There's at least one stack for every tutorial.
@@ -110,7 +66,69 @@ fundamental that encapsulate a collection of related resources. There's at least
 That means you can run the CDK to create the infrastructure in each tutorial without going through every detail. You might regret that
 when things go wrong or you want to know how to use it.
 
-## Other approaches
+:::note
+Clone the GitHub repo for this site, https://github.com/baremetalhelp/baremetal.help .
+
+You're going to need this repo to run any of the code we wrote for the BareMetal Tutorials. This documentation is also in the same repo.
+:::
+
+### The enterprise track
+
+You'll run this at most once, preferably in a new, empty AWS Account. You do not actually need
+to run these stacks at all. You can do everything in the console or the AWS CLI if you wish. But it's a
+big deal if this is done repeatably and consistently, the BareMetal way.
+
+```mermaid
+stateDiagram-v2
+  direction LR
+  state "AWS Multi-account Organization" as organization
+  state "Landing Zone" as landingzone
+  state "Landing Zone CI/CD" as landing_zone_cicd
+  state "Single Sign-On" as sso
+  state "Enterprise Email" as email
+  state "AWS Organization CI/CD" as organization_cicd
+  [*] --> organization
+  organization --> organization_cicd
+  organization_cicd --> sso
+  organization_cicd --> email
+  email --> sso
+  sso --> landingzone
+  landingzone --> [*]
+  landingzone --> landing_zone_cicd
+  landing_zone_cicd --> [*]
+```
+
+### The features track
+
+You can run as many of these as you want and do not have to create all the features at once. The same thing goes here
+as did for the enterprise BareMetal stacks. You do not actually have to do this using the infra-as-code code here.
+But you'll get sad if you don't make it consistent and repeatable.
+
+```mermaid
+stateDiagram-v2
+  direction LR
+  state "Complete Documentation Website" as documentation
+  state "Content Delivery Networks, CDN" as cdn
+  state "Hosted CI/CD (GitHub Actions)" as githubactions
+  state "Artifacts Repos" as artifacts
+  state "GitHub Actions" as gha
+  state "Pick a Feature You Like" as pick_one
+  state "Rinse and Repeat" as rinse_and_repeat
+  pick_one --> documentation
+  pick_one --> githubactions
+  pick_one --> cdn
+  pick_one --> artifacts
+  pick_one --> gha
+  gha --> rinse_and_repeat
+  artifacts --> rinse_and_repeat
+  cdn --> rinse_and_repeat
+  documentation --> rinse_and_repeat
+  githubactions --> rinse_and_repeat
+  rinse_and_repeat --> [*]
+  [*] --> pick_one
+```
+
+## Other Approaches
 
 People have been creating Public Cloud infrastructure for as long as it's been around. There are lots of ways to do it. BareMetal is but just one way of many. Here are some examples.
 
@@ -143,7 +161,7 @@ We're adding more all the time. So please check back often to see what's new.
 | GitHub Actions [links to this and above too] |
 | Enterprise email                             |
 
-## Nothing special
+## Nothing Special
 
 There's already so much great documentation for all of the resources you can create in the public cloud. We don't duplicate it, and will cheerfully link to the best documentation along the way.
 
@@ -152,7 +170,7 @@ you can pick and chose what you want. The common configuration means that all yo
 
 We make it super clear when there are dependencies on other tutorials.
 
-## Overall assumptions
+## Overall Assumptions
 
 Here are the basics. Each tutorial relies on at least these. Additional requirements are listed in each tutorial as needed.
 
@@ -161,11 +179,11 @@ Here are the basics. Each tutorial relies on at least these. Additional requirem
 3. You have installed the [latest AWS command-ine tools, CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 4. You have installed the [latest AWS CDK CLI](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html).
 
-## Verify your setup
+## Verify Your Setup
 
 Blah.
 
-## Shared configuration
+## Shared Configuration
 
 We make it easy to define common configuration used across all stacks. That way everything's consistent.
 
@@ -193,24 +211,25 @@ All fields are optional. Here's what each field does.
 | `cdnEndpoint`    | If you're developing a CDN, add this field                                                                                             |
 | `gitHubUser`     | For publishing documentation                                                                                                           |
 
-## Consistent and universal resource tagging
+## Consistent and Universal Resource Tagging
 
 Resource tagging is at the very core of Public Cloud best practices. Again in `./config/common-config.ts`, edit `globalTags` key/value tags. Your Organization creates a custom policy for required tags and values. For example, departmental charge back requires consistent tagging.
 
-Here's the tags we use
+Here's the tags we use. But your enterprise will want more as a best practice, including 
 
 ```ts
 export const globalTags: { [key: string]: any } = {
     repo: "https://github.com/baremetalhelp/baremetal.help",
     owner: "tech@baremetal.help",
-    status: "dev",
+    environment: "dev",
     description: "Infra-as-Code and documentation for a robust cloud-native enterprise foundation",
 };
 ```
 
-## To-do
+## To-Do
 
 - [x] Make all configuration fields optional and handle them
+- [ ] Each tutorial must have at least the following sections: preamble with resource diagram "Assumptions", "Required Configuration", "How to Deploy", "Verification", "Stack Resources" as table, "How it works", 
 - [ ] Add all the links
 - [ ] Comments in CDK and data structures
 - [ ] Separate CDN prefix for domain name
@@ -221,6 +240,10 @@ export const globalTags: { [key: string]: any } = {
 - [ ] Create Enterprise track and Features track in top-level doc sidebar menu
 - [ ] Fix doc links. Sometimes we copied the URL from `http://localhost:3000`
 - [ ] Test whether an empty Managed Services list in Permission Sets work. Otherwise do the same as missing policy. I don't think it's an error to have both missing because we could just be setting things up.
+- [ ] Explore making true constructs for the meat of stacks, even if they're only used once in BareMetal
+- [x] Use title case for H1 _and_ H2 b/c H2 are document headings, sentence case for everything else
+- [ ] Open source goodness like licensing, semantic versioning, PR template, ...
+- [ ] GitHub Actions for stack (hooks per stack if possible)
 
 :::note
 BareMetal is not really a trademark. But "BareMetal is not really a trademark™" is.

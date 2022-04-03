@@ -6,8 +6,8 @@ import {
     CfnPermissionSetProps,
 } from "aws-cdk-lib/aws-sso";
 import { Construct } from "constructs";
+import { COMMON_CONFIG } from "../../config/common-config";
 import { landingZoneConfig } from "../../config/landing-zone-config";
-import { bareMetalConfig } from "../../config/common-config";
 import { PermissionSetConfig } from "../model";
 
 export interface BareMetalLandingZoneStackProps extends StackProps {}
@@ -71,7 +71,7 @@ export class BareMetalLandingZoneStack extends Stack {
     ) {
         super(scope, id, props);
 
-        const { ssoInstanceArn } = props.bareMetalConfig;
+        const { ssoInstanceArn } = COMMON_CONFIG;
 
         if (!ssoInstanceArn) {
             throw Error(

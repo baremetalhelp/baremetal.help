@@ -8,6 +8,25 @@ We're going to build a Content Delivery Network, CDN, from scratch. A CDN serves
 
 CDNs cache too. So you only need to copy the original to one place (the _origin_) and the CDN takes care of copying to edge locations on a cache miss. Origin is an S3 Bucket, but could be an API.
 
+## Architecture
+
+```mermaid
+stateDiagram-v2
+  state "AWS CloudFront" as cloudfront
+  state "Origin: AWS S3 Bucket" as origin
+  state "Route 53 HostedZone" as hosted_zone
+  state "SSL Certificate" as ssl_cert
+  state "DNS Alias Record" as a_record
+  state "AWS Certificate Manager" as acm
+  state "CloudWatch" as cloudwatch
+  state "Certificate Expiry Alarm" as expiry_alarm
+  cloudwatch --> expiry_alarm
+  cloudfront --> origin : read-through cache
+  hosted_zone --> a_record
+  a_record --> cloudfront : cdn.baremetal.help
+  acm --> ssl_cert
+```
+
 ## Assumptions
 
 See the [overall assumptions in "About BareMetal Tutorials"](intro#overall-assumptions).
@@ -23,7 +42,6 @@ If you write applications that rely on the internal URL, you'll have to change t
 It's an random internal name created for you by AWS.
 
 If you just want to play with a CDN or don't have a custom domain, your best bet is to use the [AWS console](https://aws.amazon.com/cloudfront/) directly rather than deploy the stack for this tutorial.
-
 :::
 
 In this repo at the top level, run this to see a list of all the BareMetal stacks.
@@ -34,7 +52,7 @@ cdk ls
 
 `BareMetalCdn` is the stack for this tutorial. You'll deploy that in a bit.
 
-## First some configuration
+## Required Configuration
 
 The CDN stack requires the following configuration.
 
@@ -45,9 +63,8 @@ const bareMetalConfig: BareMetalConfig = {
   domainName: "example.com",
   cdnEndpoint: "cdn.example.com",
 };
-```
-
 ## Deploy
+```
 
 ```bash
 cdk deploy BareMetalCdn

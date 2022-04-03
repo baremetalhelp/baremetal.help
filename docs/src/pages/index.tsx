@@ -18,7 +18,7 @@ function HomepageHeader() {
                         className="button button--secondary button--lg"
                         to="/docs/intro"
                     >
-                        Click Here to Start Building you AWS Enterprise
+                        Click Here to Start Building your AWS Enterprise
                         Infrastructure from Bare Metal
                     </Link>
                 </div>

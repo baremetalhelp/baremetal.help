@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import { App, Environment } from "aws-cdk-lib";
+import { GLOBAL_TAGS as tags } from "../config/common-config";
 import {
     BareMetalAwsOrganizationStack,
     BareMetalCdnStack,
     BareMetalGitHubPagesStack,
     BareMetalLandingZoneStack,
 } from "../lib/stacks";
-import { globalTags as tags } from "../config/common-config";
 
 const env: Environment = {
     account: process.env.CDK_DEFAULT_ACCOUNT,

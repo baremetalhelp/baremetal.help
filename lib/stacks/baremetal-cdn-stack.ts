@@ -10,6 +10,7 @@ import { ARecord, HostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
+import { COMMON_CONFIG } from "../../config/common-config";
 
 export interface BareMetalCdnStackProps extends StackProps {}
 
@@ -17,7 +18,7 @@ export class BareMetalCdnStack extends Stack {
     constructor(scope: Construct, id: string, props: BareMetalCdnStackProps) {
         super(scope, id, props);
 
-        const { domainName, cdnEndpoint } = props.bareMetalConfig;
+        const { domainName, cdnEndpoint } = COMMON_CONFIG;
 
         if (!domainName || !cdnEndpoint) {
             throw Error("CDN requires both a domain and a CDN endpoint");

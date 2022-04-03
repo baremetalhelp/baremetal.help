@@ -81,7 +81,8 @@ export enum Account {
 }
 ```
 
-An `enum` is better than constants because we can use them in type-safe data structures. Remember these are strings.[^1]
+An `enum` is better than constants because we can use them in type-safe data structures,
+whereas simple constants could be misspelled. Remember these are strings.[^1]
 
 ### Get the list of SSO Group IDs
 
@@ -131,7 +132,7 @@ In the above, the `inlinePolicy` was omitted. We'll make a Permission Set in a b
 
 Define as many of these as you have roles, job functions, or however else you plan to administer access.
 
-## Now glue everything together
+## Now Glue Everything Together
 
 In the file `landing-zone-config.ts`, see the interface `GroupAssignment`
 
@@ -188,7 +189,7 @@ And `permissionSetConfig` is the permissions you defined previously. You can def
     },
 ```
 
-## Deploy the SSO stack
+## Deploy the SSO Stack
 
 Blah
 
@@ -198,7 +199,7 @@ cdk --profile baremetal.help --region us-east-1 deploy BareMetalLandingZone
 
 Blah
 
-## Behind the scenes
+## Behind the Scenes
 
 Blah
 
