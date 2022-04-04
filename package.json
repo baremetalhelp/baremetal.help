@@ -7,14 +7,27 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
-        "test": "jest",
-        "cdk": "cdk"
+        "cdk": "cdk",
+        "commit": "git-cz",
+        "lint:fix": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+        "test": "jest --config jest.json --coverage",
+        "semantic-release": "semantic-release"
     },
     "devDependencies": {
         "@types/jest": "^26.0.10",
         "@types/node": "10.17.27",
         "@types/uuid": "^8.3.4",
+        "@typescript-eslint/eslint-plugin": "^5.17.0",
+        "@typescript-eslint/parser": "^5.17.0",
         "aws-cdk": "2.16.0",
+        "cz-conventional-changelog": "3.3.0",
+        "eslint": "^7.32.0",
+        "eslint-config-standard": "^16.0.3",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.2.0",
+        "eslint-plugin-react": "^7.29.4",
         "jest": "^26.4.2",
         "ts-jest": "^26.2.0",
         "ts-node": "^9.0.0",
@@ -27,11 +40,17 @@
         "cdk-constants": "^3.0.3",
         "cdk-iam-floyd": "^0.338.0",
         "constructs": "^10.0.0",
-        "js-yaml": "^4.1.0"
+        "js-yaml": "^4.1.0",
+        "react-scripts": "^5.0.0"
     },
     "prettier": {
         "semi": true,
         "singleQuote": false,
         "tabWidth": 4
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }

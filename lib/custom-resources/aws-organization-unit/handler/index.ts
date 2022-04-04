@@ -21,12 +21,12 @@ export async function onEventHandler(event: any) {
 
             if (ou) {
                 console.log(`Create Org Unit ${Name} for parent ${ParentId}`);
-                let createOrganizationalUnitCommand =
+                const createOrganizationalUnitCommand =
                     new CreateOrganizationalUnitCommand({
                         ParentId,
                         Name,
                     });
-                let response = await organizationsClient.send(
+                const response = await organizationsClient.send(
                     createOrganizationalUnitCommand
                 );
                 ou = response.OrganizationalUnit;
@@ -44,7 +44,7 @@ export async function onEventHandler(event: any) {
             console.log(
                 `Update Org Unit ${Name} for parent ${ParentId} for ${PhysicalResourceId}`
             );
-            let updateOrganizationalUnitCommand =
+            const updateOrganizationalUnitCommand =
                 new UpdateOrganizationalUnitCommand({
                     OrganizationalUnitId: PhysicalResourceId,
                     Name,
@@ -68,17 +68,17 @@ export async function onEventHandler(event: any) {
 }
 
 async function findExistingOrganizationUnit(
-    client: any,
-    ParentId: any,
-    Name: any
+    client: OrganizationsClient,
+    ParentId: string,
+    Name: string
 ) {
-    let paginator = paginateListOrganizationalUnitsForParent(
+    const paginator = paginateListOrganizationalUnitsForParent(
         { client },
         { ParentId }
     );
 
     for await (const page of paginator) {
-        let found = page.OrganizationalUnits?.find((ou) => ou.Name === Name);
+        const found = page.OrganizationalUnits?.find((ou) => ou.Name === Name);
 
         if (found) {
             return found;

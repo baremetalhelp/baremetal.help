@@ -24,7 +24,7 @@ export class AwsOrganizationUnitCustomResource extends Construct {
         const { Name, ParentId } = props;
         const ouProvider = AwsOrganizationUnitProvider.getOrCreate(this);
 
-        let ou = new CustomResource(this, `OU-${uuidv4()}`, {
+        const ou = new CustomResource(this, `OU-${uuidv4()}`, {
             serviceToken: ouProvider.provider.serviceToken,
             resourceType: "Custom::OrganizationUnit",
             properties: {

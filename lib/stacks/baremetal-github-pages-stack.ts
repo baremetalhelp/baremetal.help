@@ -7,7 +7,7 @@ import {
 } from "aws-cdk-lib/aws-route53";
 import { Construct } from "constructs";
 
-export interface BareMetalGitHubPagesStackProps extends StackProps {}
+export type BareMetalGitHubPagesStackProps = StackProps
 
 const GITHUB_PAGES_IP_ADDRESSES = [
     "185.199.108.153",

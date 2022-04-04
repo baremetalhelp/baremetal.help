@@ -25,7 +25,7 @@ export class AwsOrganizationUnitProvider extends NestedStack {
     constructor(scope: Construct, id: string) {
         super(scope, id);
 
-        let onEventHandler = new NodejsFunction(
+        const onEventHandler = new NodejsFunction(
             this,
             "aws-organization-unit-handler",
             {

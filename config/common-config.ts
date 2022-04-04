@@ -19,7 +19,7 @@ export const COMMON_CONFIG: BareMetalConfig = {
  *
  * Add your own.
  */
-export const GLOBAL_TAGS: { [key: string]: any } = {
+export const GLOBAL_TAGS: { [key: string]: string | undefined } = {
     repo: "https://github.com/baremetalhelp/baremetal.help",
     owner: "sre@baremetal.help",
     environment: process.env.ENVIRONMENT,

@@ -1,11 +1,10 @@
 import { ManagedPolicies } from "cdk-constants";
 import { S3 } from "cdk-iam-floyd";
-import { PermissionSetConfig } from "../lib/model";
 import {
-    adminPermissionSetConfig,
     developerPermissionSetConfig,
-    readOnlyPermissionSetConfig,
+    readOnlyPermissionSetConfig
 } from "../lib/config/permission-sets";
+import { PermissionSetConfig } from "../lib/model";
 
 export enum Account {
     BILLING_ACCOUNT = "825617765789",
@@ -15,15 +14,6 @@ export enum Account {
     AUDIT = "405828339838",
     LOG_ARCHIVE = "937567863100",
 }
-
-const ALL_ACCOUNTS = [
-    Account.BILLING_ACCOUNT,
-    Account.SANDBOX,
-    Account.PREPROD1,
-    Account.PROD1,
-    Account.AUDIT,
-    Account.LOG_ARCHIVE,
-];
 
 export enum Group {
     ADMINISTRATOR = "9067420728-45df392d-85da-4751-9f20-47fb268d3709",

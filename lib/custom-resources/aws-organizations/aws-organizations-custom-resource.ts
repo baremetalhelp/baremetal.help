@@ -18,12 +18,12 @@ export class AwsOrganizationsCustomResource extends Construct {
     constructor(scope: Construct, id: string) {
         super(scope, id);
 
-        let awsOrganizationsProvider = new AwsOrganizationsProvider(
+        const awsOrganizationsProvider = new AwsOrganizationsProvider(
             this,
             "aws-organizations-provider"
         );
 
-        let org = new CustomResource(
+        const org = new CustomResource(
             this,
             "aws-organizations-custom-resource",
             {
@@ -36,14 +36,14 @@ export class AwsOrganizationsCustomResource extends Construct {
 
         // Common call
         //
-        let awsSdkCall: AwsSdkCall = {
+        const awsSdkCall: AwsSdkCall = {
             service: "Organizations",
             action: "listRoots",
             physicalResourceId: PhysicalResourceId.fromResponse("Roots.0.Id"),
             region: "us-east-1",
         };
 
-        let root = new AwsCustomResource(
+        const root = new AwsCustomResource(
             this,
             "aws-organizations-root-custom-resource",
             {

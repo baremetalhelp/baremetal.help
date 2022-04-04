@@ -20,7 +20,7 @@ export class AwsOrganizationsProvider extends Construct {
     constructor(scope: Construct, id: string) {
         super(scope, id);
 
-        let createOrgHandler = new NodejsFunction(
+        const createOrgHandler = new NodejsFunction(
             this,
             "aws-organization-handler",
             {

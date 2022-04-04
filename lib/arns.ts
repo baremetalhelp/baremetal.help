@@ -15,8 +15,8 @@ export function s3BucketArn(bucketName: string) {
 }
 
 export function organizationArn(
-  masterAccountId: string = '*',
-  organizationId: string = '*'
+  masterAccountId = '*',
+  organizationId = '*'
 ) {
   return resourceFor(
     new Organizations().onOrganization(masterAccountId, organizationId)

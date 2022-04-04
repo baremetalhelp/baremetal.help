@@ -10,7 +10,7 @@ import { COMMON_CONFIG } from "../../config/common-config";
 import { landingZoneConfig } from "../../config/landing-zone-config";
 import { PermissionSetConfig } from "../model";
 
-export interface BareMetalLandingZoneStackProps extends StackProps {}
+export type BareMetalLandingZoneStackProps = StackProps
 
 function permissionSetFromConfig(
     scope: Construct,

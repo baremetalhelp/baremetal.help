@@ -22,7 +22,7 @@ export async function onEventHandler(event: any) {
 
     switch (RequestType) {
         case "Create":
-            let describeOrganization = await organizationsClient.send(
+            const describeOrganization = await organizationsClient.send(
                 new DescribeOrganizationCommand({})
             );
 
@@ -32,7 +32,7 @@ export async function onEventHandler(event: any) {
                     describeOrganization.Organization
                 );
 
-                let Id = describeOrganization.Organization
+                const Id = describeOrganization.Organization
                     ? describeOrganization.Organization.Id
                     : undefined;
 
@@ -44,7 +44,7 @@ export async function onEventHandler(event: any) {
                 };
             }
 
-            let createOrganization = await organizationsClient.send(
+            const createOrganization = await organizationsClient.send(
                 new CreateOrganizationCommand({
                     FeatureSet: OrganizationFeatureSet.ALL,
                 })

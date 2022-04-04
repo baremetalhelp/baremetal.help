@@ -5,7 +5,7 @@ import {
     AwsOrganizationUnitCustomResource
 } from "../custom-resources";
 
-export interface AwsOrganizationStackProps extends StackProps {}
+export type AwsOrganizationStackProps = StackProps
 
 export class BareMetalAwsOrganizationStack extends Stack {
     constructor(
