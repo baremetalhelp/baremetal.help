@@ -1,11 +1,5 @@
 import { Duration } from "aws-cdk-lib";
-import {
-    Code,
-    Function,
-    Runtime,
-    SingletonFunction,
-} from "aws-cdk-lib/aws-lambda";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
 import { Provider } from "aws-cdk-lib/custom-resources";
 import { Iam, Organizations } from "cdk-iam-floyd";
 import { Construct } from "constructs";
@@ -20,11 +14,12 @@ export class AwsOrganizationsProvider extends Construct {
     constructor(scope: Construct, id: string) {
         super(scope, id);
 
-        const createOrgHandler = new NodejsFunction(
+        const createOrgHandler = new SingletonFunction(
             this,
             "aws-organization-handler",
             {
-                entry: path.join(__dirname, "handler", "index.ts"),
+                uuid: "325DBE42-7391-4873-9042-7200D5397ACC",
+                code: Code.fromAsset(path.join(__dirname, "handler")),
                 runtime: Runtime.NODEJS_14_X,
                 handler: "onEventHandler",
                 timeout: Duration.minutes(5),

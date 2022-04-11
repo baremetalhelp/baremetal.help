@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { App, Environment } from "aws-cdk-lib";
-import { GLOBAL_TAGS as tags } from "../config/common-config";
+import { COMMON_CONFIG as commonConfig, GLOBAL_TAGS as tags } from "../config";
 import {
     BareMetalAwsOrganizationStack,
     BareMetalCdnStack,
@@ -15,13 +15,19 @@ const env: Environment = {
 
 const app = new App();
 
-new BareMetalCdnStack(app, "BareMetalCdn", { env, tags });
+const commonStackProps = { env, tags, commonConfig };
 
-new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", { env, tags });
+new BareMetalCdnStack(app, "BareMetalCdn", { ...commonStackProps });
 
-new BareMetalAwsOrganizationStack(app, "BareMetalAwsOrganization", {
-    env,
-    tags,
+new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", {
+    ...commonStackProps,
 });
 
-new BareMetalLandingZoneStack(app, "BareMetalLandingZone", { env, tags });
+new BareMetalAwsOrganizationStack(app, "BareMetalAwsOrganization", {
+    ...commonStackProps,
+});
+
+new BareMetalLandingZoneStack(app, "BareMetalLandingZone", {
+    ...commonStackProps,
+});
+

@@ -76,7 +76,7 @@ You're going to need this repo to run any of the code we wrote for the BareMetal
 
 You'll run this at most once, preferably in a new, empty AWS Account. You do not actually need
 to run these stacks at all. You can do everything in the console or the AWS CLI if you wish. But it's a
-big deal if this is done repeatably and consistently, the BareMetal way.
+big deal if this is done repeatably and consistently, the BareMetal way, because a lot of the features you'll be adding in the features track rely on this stuff being set up right.
 
 ```mermaid
 stateDiagram-v2
@@ -136,30 +136,30 @@ People have been creating Public Cloud infrastructure for as long as it's been a
 This table is wrong and incomplete. It's also biased heavily on the capabilities of BareMetal rather than things it can't do.
 :::
 
-| Tooling                                                                                                      | Framework? | Infrastructure-as-Code | Data Driven | CI/CD | SSO Landing Zone | SSO Permissions | AWS Organization | AWS Accounts | Data-Driven | GitHub Pages Website | GitHub Integration |
-| ------------------------------------------------------------------------------------------------------------ | ---------- | ---------------------- | ----------- | ----- | ---------------- | --------------- | ---------------- | ------------ | ----------- | -------------------- | ------------------ | --- |
-| [AWS Console, 100% Click-Ops](https://aws.amazon.com/console/)                                               |            |                        |             |       | ✅                | ✅               | ✅                | ✅            |             |                      |                    |
-| [Cloudformation](https://aws.amazon.com/cloudformation/)                                                     |            | ✅                      |             |       | ✅                | ✅               | ✅                | ✅            |             |                      |                    |
-| [AWS CDK](https://aws.amazon.com/cdk/)                                                                       |            | ✅                      |             | ?     | ✅                | ✅               |                  | ✅            |             |                      |                    |
-| [Terraform](https://www.terraform.io)                                                                        |            | ✅                      |             |       | ✅                | ✅               | ✅                | ✅            |             |                      |                    |
-| [aws-bootstrap-kit](https://github.com/awslabs/aws-bootstrap-kit)                                            | ✅          | ✅                      | ✅           |       | ✅                | ✅               |                  |              |             |                      |                    |     |
-| [org-formation](https://github.com/org-formation/org-formation-cli)                                          | ✅          | ✅                      | ✅           | ✅     | ✅                |                 | ✅                | ✅            | ✅           |                      |                    |
-| [BareMetal Help](https://baremetal.help)                                                                     | ✅          | ✅                      | ✅           | ✅     | ✅                | ✅               | ✅                | ✅            | ✅           | ✅                    | ✅                  |
-| [Account Factory for Terraform](https://docs.aws.amazon.com/controltower/latest/userguide/aft-overview.html) | ✅          | ✅                      | ✅           | ?     | ✅                |                 | ✅                | ✅            | ?           |                      |                    |
+| Tooling | Framework? | Infrastructure-as-Code | Data Driven | CI/CD | SSO Landing Zone | SSO Permissions | AWS Organization | AWS Accounts | Data-Driven | GitHub Pages Website | GitHub Integration |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [AWS Console, 100% Click-Ops](https://aws.amazon.com/console/) | | | | | ✅ | ✅ | ✅ | ✅ | | | |
+| [Cloudformation](https://aws.amazon.com/cloudformation/) | | ✅ | | | ✅ | ✅ | ✅ | ✅ | | | |
+| [AWS CDK](https://aws.amazon.com/cdk/) | | ✅ | | ? | ✅ | ✅ | | ✅ | | | |
+| [Terraform](https://www.terraform.io) | | ✅ | | | ✅ | ✅ | ✅ | ✅ | | | |
+| [aws-bootstrap-kit](https://github.com/awslabs/aws-bootstrap-kit) | ✅ | ✅ | ✅ | | ✅ | ✅ | | | | | | |
+| [org-formation](https://github.com/org-formation/org-formation-cli) | ✅ | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ | ✅ | | |
+| [BareMetal Help](https://baremetal.help) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [Account Factory for Terraform](https://docs.aws.amazon.com/controltower/latest/userguide/aft-overview.html) | ✅ | ✅ | ✅ | ? | ✅ | | ✅ | ✅ | ? | | |
 
 ## Available BareMetal tutorials
 
 We're adding more all the time. So please check back often to see what's new.
 
-| BareMetal Stack                              | What and How                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Resources                                                                                                                                                                                                  |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Content Delivery Network, CDN                | You use a CDN to make things like images available at "edge locations" so that people on your website can get those images — sometimes large — from an internet data center near them. It's quicker.                                                                                                                                                                                                                                                                                                    | [Wikipedia CDN](https://en.wikipedia.org/wiki/Content_delivery_network), [AWS CloudFront](https://aws.amazon.com/cloudfront/)                                                                              |
-| A documentation website, like this one       | Using [Markdown](https://docusaurus.io/docs/markdown-features) and a few tools, you'll be able to create a website just like this one. We have infra-as-code for setting up free hosting on [GitHub Pages](https://pages.github.com/), which is free even for moderate volume. You can deploy the documentation at your apex domain, just like we did here at https://baremetal.help . We have [GitHub Actions](https://github.com/features/actions) for deploying documentation updates automatically. | [Docusaurus](https://docusaurus.io/), [Markdown](https://docusaurus.io/docs/markdown-features)                                                                                                             |
-| An Enterprise AWS Organization               | You'll need this to manage multiple accounts effectively. For Production, Pre-production, and Development, for example.                                                                                                                                                                                                                                                                                                                                                                                 | [AWS Organizations](https://aws.amazon.com/organizations/), [AWS ControlTower](https://aws.amazon.com/controltower/?control-blogs.sort-by=item.additionalFields.createdDate&control-blogs.sort-order=desc) |
-| Single Sign-On                               | We show how to build an enterprise-grade Single Sign-On infrastructure from scratch. You'll use a user/group directory — probably on Azure AD — and an SSO implementation on AWS that connects to it. This is what your enterprise grade SSO looks like.                                                                                                                                                                                                                                                | [Azure Active Directory](https://azure.microsoft.com/en-us/services/active-directory/), [AWS SSO](https://aws.amazon.com/single-sign-on/)                                                                  |
-| Artifact Repos                               | You'll probably want to control access to public repos for package managers, where you can approve and audit packages for external sources. There are repo configurations for npm, pip, yarn, twine, Maven, and NuGet. There's a stack you can run that creates these repos with pull-through caching and the right configuration.                                                                                                                                                                      | [AWS CodeArtifact](https://aws.amazon.com/codeartifact/)                                                                                                                                                   |
+| BareMetal Stack | What and How | Resources |
+| --- | --- | --- |
+| Content Delivery Network, CDN | You use a CDN to make things like images available at "edge locations" so that people on your website can get those images — sometimes large — from an internet data center near them. It's quicker. | [Wikipedia CDN](https://en.wikipedia.org/wiki/Content_delivery_network), [AWS CloudFront](https://aws.amazon.com/cloudfront/) |
+| A documentation website, like this one | Using [Markdown](https://docusaurus.io/docs/markdown-features) and a few tools, you'll be able to create a website just like this one. We have infra-as-code for setting up free hosting on [GitHub Pages](https://pages.github.com/), which is free even for moderate volume. You can deploy the documentation at your apex domain, just like we did here at https://baremetal.help . We have [GitHub Actions](https://github.com/features/actions) for deploying documentation updates automatically. | [Docusaurus](https://docusaurus.io/), [Markdown](https://docusaurus.io/docs/markdown-features) |
+| An Enterprise AWS Organization | You'll need this to manage multiple accounts effectively. For Production, Pre-production, and Development, for example. | [AWS Organizations](https://aws.amazon.com/organizations/), [AWS ControlTower](https://aws.amazon.com/controltower/?control-blogs.sort-by=item.additionalFields.createdDate&control-blogs.sort-order=desc) |
+| Single Sign-On | We show how to build an enterprise-grade Single Sign-On infrastructure from scratch. You'll use a user/group directory — probably on Azure AD — and an SSO implementation on AWS that connects to it. This is what your enterprise grade SSO looks like. | [Azure Active Directory](https://azure.microsoft.com/en-us/services/active-directory/), [AWS SSO](https://aws.amazon.com/single-sign-on/) |
+| Artifact Repos | You'll probably want to control access to public repos for package managers, where you can approve and audit packages for external sources. There are repo configurations for npm, pip, yarn, twine, Maven, and NuGet. There's a stack you can run that creates these repos with pull-through caching and the right configuration. | [AWS CodeArtifact](https://aws.amazon.com/codeartifact/) |
 | GitHub Actions [links to this and above too] |
-| Enterprise email                             |
+| Enterprise email |
 
 ## Nothing Special
 
@@ -187,7 +187,7 @@ Blah.
 
 We make it easy to define common configuration used across all stacks. That way everything's consistent.
 
-We're defining infrastructure-as-code for everything. So all the configuration data you need is in code. We like the TypeScript language, but we could have used and of the supported [CDK languages](https://aws.amazon.com/cdk/faqs/#:~:text=Q%3A%20What%20programming%20languages%20does,Go%20(in%20Developer%20Preview).).
+We're defining infrastructure-as-code for everything. So all the configuration data you need is in code. We like the TypeScript language, but we could have used any of the [supported CDK languages](https://aws.amazon.com/cdk/faqs/#:~:text=Q%3A%20What%20programming%20languages%20does,Go%20(in%20Developer%20Preview).).
 
 In the file `./config/common-config.ts`, you can see
 
@@ -203,13 +203,13 @@ const bareMetalConfig: BareMetalConfig = {
 
 All fields are optional. Here's what each field does.
 
-| Field            | Value                                                                                                                                  |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Field | Value |
+| --- | --- |
 | `ssoInstanceArn` | If you're using Single Sign-On, you'll have this value handy. This is used to create permissions for users using the SSO Landing Zone. |
-| `ssoRegion`      | This is the region of SSO, not the region you're using for your BareMetal stacks                                                       |
-| `domainName`     | If you have a domain you want to use for documentation, add this value                                                                 |
-| `cdnEndpoint`    | If you're developing a CDN, add this field                                                                                             |
-| `gitHubUser`     | For publishing documentation                                                                                                           |
+| `ssoRegion` | This is the region of SSO, not necessarily the region you're using for your BareMetal stacks. |
+| `domainName` | If you have a domain you want to use for documentation, add this value. |
+| `cdnEndpoint` | If you're developing a CDN, add this field, |
+| `gitHubUser` | For publishing documentation. |
 
 ## Consistent and Universal Resource Tagging
 
@@ -244,6 +244,11 @@ export const globalTags: { [key: string]: any } = {
 - [x] Use title case for H1 _and_ H2 b/c H2 are document headings, sentence case for everything else
 - [ ] Open source goodness like licensing, semantic versioning, PR template, ...
 - [ ] GitHub Actions for stack (hooks per stack if possible)
+- [ ] Maybe move common config back to top-level and pass explicitly to stacks? Yeah. I think that's right.
+- [ ] Alt text for images
+- [ ] Do we need custom domain for AD Tenant?
+- [ ] Clarify potential issues and fixes for each step 
+- [ ] Clarify and be super explicit about the P2 trial license
 
 :::note
 BareMetal is not really a trademark. But "BareMetal is not really a trademark™" is.

@@ -1,18 +1,18 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { BareMetalCdnConstruct } from "../constructs/baremetal-cdn";
+import { BareMetalCdn } from "../constructs";
+import { BareMetalConfig } from "../model";
 
 export interface BareMetalCdnStackProps extends StackProps {
-    domainName?: string;
-    cdnEndpoint?: string;
+    commonConfig: BareMetalConfig;
 }
 
 export class BareMetalCdnStack extends Stack {
     constructor(scope: Construct, id: string, props: BareMetalCdnStackProps) {
         super(scope, id, props);
 
-        const { domainName, cdnEndpoint } = props;
+        const { domainName, cdnEndpoint } = props.commonConfig;
 
-        new BareMetalCdnConstruct(this, "cdn", { domainName, cdnEndpoint });
+        new BareMetalCdn(this, "cdn", { domainName, cdnEndpoint });
     }
 }

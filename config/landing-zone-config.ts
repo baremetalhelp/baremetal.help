@@ -1,9 +1,5 @@
 import { ManagedPolicies } from "cdk-constants";
 import { S3 } from "cdk-iam-floyd";
-import {
-    developerPermissionSetConfig,
-    readOnlyPermissionSetConfig
-} from "../lib/config/permission-sets";
 import { PermissionSetConfig } from "../lib/model";
 
 export enum Account {
@@ -16,10 +12,9 @@ export enum Account {
 }
 
 export enum Group {
-    ADMINISTRATOR = "9067420728-45df392d-85da-4751-9f20-47fb268d3709",
-    VIEW_ONLY = "9067420728-101bc3b4-7cbc-4b31-9bfe-4a50632d72b8",
-    READ_ONLY = "9067420728-b8b4d794-4d00-4b87-a1b2-7c58ca76c3a2",
-    DEVELOPER = "9067420728-e78cfac1-937f-459a-98f7-1a4fe90b5772",
+    SRE = "90674777ee-7d026bff-6189-4057-8a8e-fc5e79c39742",
+    VIEW_ONLY = "90674777ee-3a05d01f-42f1-4234-9f71-432be98faf04",
+    DEVELOPER = "90674777ee-9dda09a5-4155-491a-8991-82c5338e6160",
 }
 
 interface GroupAssignment {
@@ -29,10 +24,10 @@ interface GroupAssignment {
 }
 
 export const landingZoneConfig: GroupAssignment[] = [
-    // Administrator
+    // SRE
     //
     {
-        group: Group.ADMINISTRATOR,
+        group: Group.SRE,
         accounts: [
             Account.BILLING_ACCOUNT,
             Account.SANDBOX,
@@ -42,7 +37,7 @@ export const landingZoneConfig: GroupAssignment[] = [
             Account.LOG_ARCHIVE,
         ],
         permissionSetConfig: {
-            name: "ADMINISTRATOR",
+            name: "SRE",
             awsManagedPolicyNames: [ManagedPolicies.ADMINISTRATOR_ACCESS],
         },
     },
@@ -61,19 +56,14 @@ export const landingZoneConfig: GroupAssignment[] = [
         },
     },
 
-    // Read only
-    //
-    {
-        group: Group.READ_ONLY,
-        accounts: [Account.BILLING_ACCOUNT, Account.PREPROD1, Account.PROD1],
-        permissionSetConfig: readOnlyPermissionSetConfig,
-    },
-
     // Sandbox developer
     //
     {
         group: Group.DEVELOPER,
         accounts: [Account.SANDBOX],
-        permissionSetConfig: developerPermissionSetConfig,
+        permissionSetConfig: {
+            name: "DEVELOPER",
+            awsManagedPolicyNames: [ManagedPolicies.POWER_USER_ACCESS],
+        },
     },
 ];

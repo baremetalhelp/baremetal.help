@@ -1,6 +1,5 @@
 import { Duration, NestedStack, Stack } from "aws-cdk-lib";
-import { Runtime } from "aws-cdk-lib/aws-lambda";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import { Code, Runtime, SingletonFunction } from "aws-cdk-lib/aws-lambda";
 import { Provider } from "aws-cdk-lib/custom-resources";
 import { Organizations } from "cdk-iam-floyd";
 import { Construct } from "constructs";
@@ -25,13 +24,14 @@ export class AwsOrganizationUnitProvider extends NestedStack {
     constructor(scope: Construct, id: string) {
         super(scope, id);
 
-        const onEventHandler = new NodejsFunction(
+        const onEventHandler = new SingletonFunction(
             this,
             "aws-organization-unit-handler",
             {
-                entry: path.join(__dirname, "handler", "index.ts"),
+                uuid: "93A2C2DF-747C-433D-9456-49A691A99ADE",
+                code: Code.fromAsset(path.join(__dirname, "handler")),
                 runtime: Runtime.NODEJS_14_X,
-                handler: "onEventHandler",
+                handler: "index.onEventHandler",
                 timeout: Duration.minutes(5),
             }
         );

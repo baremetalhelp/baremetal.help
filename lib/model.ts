@@ -20,18 +20,26 @@ export interface BareMetalConfig {
     // If you're publishing a documentation website like this one, add this field
     //
     gitHubUser?: string;
+    // If we're integrating with a SAML provider like Azure AD, it's helpful to have a name we can use
+    // to refer to it
+    samlProviderName?: string;
 }
 
 /**
  * We simplify the task of defining AWS Permission Sets. They can be a bit finicky if we're being completely honest.
- * 
+ *
  * Hope you agree!
  */
 export interface PermissionSetConfig {
     // This must be unique and is mandatory
     //
     name: string;
-    // 
+
+    // Optional list of the name (not ARNs) of the AWS Managed Policies this Permission Set uses
+    //
     awsManagedPolicyNames?: string[];
+    
+    // Option custom policies
+    //
     inlinePolicyStatements?: PolicyStatement[];
 }

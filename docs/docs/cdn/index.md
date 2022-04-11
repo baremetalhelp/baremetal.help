@@ -63,8 +63,9 @@ const bareMetalConfig: BareMetalConfig = {
   domainName: "example.com",
   cdnEndpoint: "cdn.example.com",
 };
-## Deploy
 ```
+
+## Deploy
 
 ```bash
 cdk deploy BareMetalCdn
@@ -77,5 +78,4 @@ Blah.
 ## Verification
 
 Blah.
-
 

@@ -2,10 +2,13 @@ import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import {
     AwsOrganizationsCustomResource,
-    AwsOrganizationUnitCustomResource
+    AwsOrganizationUnitCustomResource,
 } from "../custom-resources";
+import { BareMetalConfig } from "../model";
 
-export type AwsOrganizationStackProps = StackProps
+export interface AwsOrganizationStackProps extends StackProps {
+    commonConfig: BareMetalConfig;
+}
 
 export class BareMetalAwsOrganizationStack extends Stack {
     constructor(

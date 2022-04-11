@@ -6,18 +6,19 @@ import {
     CfnPermissionSetProps,
 } from "aws-cdk-lib/aws-sso";
 import { Construct } from "constructs";
-import { COMMON_CONFIG } from "../../config/common-config";
 import { landingZoneConfig } from "../../config/landing-zone-config";
-import { PermissionSetConfig } from "../model";
+import { BareMetalConfig, PermissionSetConfig } from "../model";
 
-export type BareMetalLandingZoneStackProps = StackProps
+export interface BareMetalLandingZoneStackProps extends StackProps {
+    commonConfig: BareMetalConfig;
+}
 
 function permissionSetFromConfig(
     scope: Construct,
     ssoInstanceArn: string,
     permissionSetConfig: PermissionSetConfig
 ) {
-    const { name, inlinePolicyStatements, awsManagedPolicyNames } =
+    const { name, awsManagedPolicyNames, inlinePolicyStatements } =
         permissionSetConfig;
 
     // Convert AWS Managed Policy Names to ARNs
@@ -71,7 +72,7 @@ export class BareMetalLandingZoneStack extends Stack {
     ) {
         super(scope, id, props);
 
-        const { ssoInstanceArn } = COMMON_CONFIG;
+        const { ssoInstanceArn } = props.commonConfig;
 
         if (!ssoInstanceArn) {
             throw Error(
