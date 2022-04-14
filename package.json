@@ -1,9 +1,7 @@
 {
     "name": "baremetal.help",
     "version": "0.1.0",
-    "bin": {
-        "baremetal.help": "bin/baremetal.help.js"
-    },
+    "bin": "bin/baremetal.help.js",
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
@@ -52,5 +50,6 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
-    }
+    },
+    "packageManager": "yarn@3.2.0"
 }

@@ -4,11 +4,11 @@ sidebar_position: 5
 
 # Set Up User and Group Provisioning
 
-We have some AD USers and AD Groups. We need to set up which ones are synchronized with AWS SSO. Hint: Pretty much all of them.
+We have some AD Users and AD Groups. We need to set up which ones are synchronized with AWS SSO. Hint: Pretty much all of them.
 
 ## Assign User and Groups
 
-The AWS Single Sing-On Enterprise Application requires users and groups to be **assigned** so that they are synchronized.
+The AWS Single Sign-On Enterprise Application requires users and groups to be **assigned** so that they are synchronized.
 
 Find the AWS Single Sign-on Enterprise Application.
 
@@ -60,7 +60,7 @@ In the AWS Single Sign-on Enterprise Application, click "Provisioning".
 
 ![](images/start-provisioning.png)
 
-::info action
+:::info action
 Click "Get started"
 :::
 
@@ -116,7 +116,8 @@ Click "Start provisioning".
 
 Nothing will happen for a bit, so put the kettle on.
 
-By default, synchronization runs every 40 minutes. It is not possible to change this delay. But is _is_ possible to "Provision on demand" on a specific AD User.
+By default, synchronization runs every 40 minutes. It is not possible to change this delay. But it _is_ possible to "Provision on demand" on a specific AD User. Although this will not
+create new SSO Groups, just assign existing ones.
 
 For this step we're only interested in seeing all users and group being synchronized at once to AWS SSO.
 

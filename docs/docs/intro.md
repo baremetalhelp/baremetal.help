@@ -249,6 +249,7 @@ export const globalTags: { [key: string]: any } = {
 - [ ] Do we need custom domain for AD Tenant?
 - [ ] Clarify potential issues and fixes for each step 
 - [ ] Clarify and be super explicit about the P2 trial license
+- [ ] Dependency diagram for the enterprise track is wrong: It should reflect options and dependencies better
 
 :::note
 BareMetal is not really a trademark. But "BareMetal is not really a trademark™" is.

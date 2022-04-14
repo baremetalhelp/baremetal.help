@@ -33,9 +33,9 @@ stateDiagram-v2
    organization --> accounts : contains
    directory --> users : provides
    directory --> groups : provides
-   permission_sets --> permission_set_assignments : binds
-   accounts --> permission_set_assignments : binds
-   groups --> permission_set_assignments : binds
+   permission_sets --> permission_set_assignments : binds to
+   accounts --> permission_set_assignments : binds to
+   groups --> permission_set_assignments : binds to
    permission_set_assignments --> landing_zone : configures
    users --> landing_zone : log in via SSO
 ```
@@ -238,7 +238,7 @@ cdk --profile baremetal.help diff BareMetalLandingZone
 
 We're creating some `AWS::SSO::PermissionSet` resources for `SRE` and the other groups. We're also assigning groups to accounts with `AWS::SSO::Assignment`. Finally, we made some permission sets that define what users in that group can do.
 
-### Looks good: Deploy
+### Looks good: deploy!
 
 :::info action
 ```bash
@@ -326,9 +326,9 @@ Click "AWS accounts" in the AWS Single Sign-On console. Open the `Dev OU.
 
 We can see that the `Sandbox` account has been assigned the Permission Sets `DEVELOPER` and `SRE`.
 
-### Try signing in!
+### Try signing in
 
-What would all this be if we didn't have a Landing Zone?
+What would all this be if we didn't have a Landing Zone that let users log in and see their stuff?
 
 :::info action
 In the AWS SSO Console, click "Settings"
@@ -366,11 +366,110 @@ Click "Skip for now" only if you're building a Landing Zone as a toy.
 
 :::info action
 Follow the MFA setup. 
+
+Log in with user and new password.
+
+Click "AWS Account (6)" (or however many accounts you have).
 :::
+
+![](images/landing-zone-first-look.png)
 
 ## Using the Landing Zone
 
-TBD.
+Logged in as a user, open each account in the list so you can see the Permission Sets available for that user in each account.
+
+In this case, we logged in as Annie Admin, and she has super powers.
+
+:::info action
+Click each account to show Permission Sets available.
+:::
+
+![](images/landing-zone-open-account-list.png)
+
+:::note
+Understand that this is not the exhaustive list of all Permission Sets, SSO Groups, and AWS Accounts.
+
+This is a list of accounts where the logged in user has at least one Permission Set. And those Permission Sets appear because the user is in the relevant group.
+
+Here's that again in pictures.
+
+```mermaid
+stateDiagram-v2
+   state "SSO Groups" as sso_groups
+   state "SSO Users" as sso_users
+   state "SSO Assignment" as sso_assignment
+   state "Permission Sets" as permission_sets
+   state "AWS Managed Policies" as aws_managed_policies
+   state "Inline Policies" as inline_policies
+   state "AWS Accounts" as accounts
+   state "AWS Organization" as organization
+   state "SSO Landing Zone" as landing_zone
+
+   sso_users --> sso_groups : member of
+   sso_groups --> sso_assignment : binds to
+   permission_sets --> sso_assignment : binds to
+   aws_managed_policies --> permission_sets : policy for
+   inline_policies --> permission_sets : policy for
+   accounts --> sso_assignment : binds to
+   organization --> accounts : contains
+   sso_assignment --> landing_zone
+   sso_assignment --> landing_zone
+   sso_assignment --> landing_zone
+   sso_assignment --> landing_zone
+   sso_assignment --> landing_zone
+```
+
+Think of SSO Assignments as a sparse matrix with group rows and account columns. Cells where they intersect mean that the group is valid in the account. Permission Sets provide policies for the group in the account.
+:::
+
+:::caution
+It's really good practice to make groups mean the same thing on each account they're assigned to. This means the Permission Set is always the same for any given group.
+:::
+
+## Using Roles and Permissions
+
+:::info action
+Click "Management console" next to `SRE` in any account. This Permission Set has admin  rights.
+:::
+
+As admin, you should be able to do pretty much everything in an account. We'll start small and create an S3 bucket.
+
+:::info action
+Navigate to the S3 console. Click "Services" in the top left next to the naughts and crosses.
+
+Find S3 and bring up the console.
+:::
+
+There probably aren't any S3 buckets yet. Let's make one.
+
+:::info action
+Click "Create bucket". Enter a unique name for the bucket and leave the defaults. Click "Create bucket".
+:::
+
+![](images/admin-creates-bucket-ok.png)
+
+Go back to the Landing Zone, the list of accounts. For the same account, let's try another role, `VIEW_ONLY`.
+
+:::info action
+Click the "Management console" link for `VIEW_ONLY`.
+:::
+
+You're still Annie, but you relinquished your superpowers. Let's confirm we no longer have what it takes to be admin.
+
+:::info action
+Navigate to the S3 console. You bucket's in the list.
+
+Select the bucket and click "Delete".
+:::
+
+Bingo.
+
+So even though you created the bucket as Annie, once you're in a more restrictive role you can't delete it.
+
+![](images/cant-delete-bucket-as-view-only.png)
+
+
+---
 
 [^1] Perhaps we could have used numbers here, but we're not sure how good AWS is at not starting account numbers with `0`.
 

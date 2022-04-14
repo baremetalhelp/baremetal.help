@@ -2,6 +2,8 @@
 import { App, Environment } from "aws-cdk-lib";
 import { COMMON_CONFIG as commonConfig, GLOBAL_TAGS as tags } from "../config";
 import {
+    BareMetalAppMeshStack,
+    BareMetalArtifactRepoStack,
     BareMetalAwsOrganizationStack,
     BareMetalCdnStack,
     BareMetalGitHubPagesStack,
@@ -31,3 +33,10 @@ new BareMetalLandingZoneStack(app, "BareMetalLandingZone", {
     ...commonStackProps,
 });
 
+new BareMetalArtifactRepoStack(app, "BareMetalArtifactRepo", {
+    ...commonStackProps,
+});
+
+new BareMetalAppMeshStack(app, "BareMetalAppMesh", {
+    ...commonStackProps,
+});
