@@ -314,7 +314,7 @@ Still in the `DEVELOPER` Permission Set detail page, click the "Accounts" tab.
 
 ![](images/permission-set-account-detail.png)
 
-We can see the DEVELOPER Permission Set is available in the `Sandbox` AWS Account.
+We can see the `DEVELOPER` Permission Set is available in the `Sandbox` AWS Account.
 
 Let's check the same thing from the AWS Accounts perspective.
 
@@ -378,7 +378,7 @@ Click "AWS Account (6)" (or however many accounts you have).
 
 Logged in as a user, open each account in the list so you can see the Permission Sets available for that user in each account.
 
-In this case, we logged in as Annie Admin, and she has super powers.
+In this case, we logged in as Annie Admin, and she has superpowers.
 
 :::info action
 Click each account to show Permission Sets available.
@@ -457,7 +457,7 @@ Click the "Management console" link for `VIEW_ONLY`.
 You're still Annie, but you relinquished your superpowers. Let's confirm we no longer have what it takes to be admin.
 
 :::info action
-Navigate to the S3 console. You bucket's in the list.
+Navigate to the S3 console. Your bucket's in the list.
 
 Select the bucket and click "Delete".
 :::
@@ -468,6 +468,12 @@ So even though you created the bucket as Annie, once you're in a more restrictiv
 
 ![](images/cant-delete-bucket-as-view-only.png)
 
+## The Upshot
+
+We created an enterprise-grade landing zone.
+
+We tried logging in as a use with two different roles, and we saw that the permissions were different for each
+role.  
 
 ---
 

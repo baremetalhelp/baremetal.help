@@ -81,7 +81,7 @@ const config = {
                     }, ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, stephen@baremetal.help`,
+            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, support@baremetal.help`,
         },
         prism: {
             theme: lightCodeTheme,

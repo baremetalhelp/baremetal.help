@@ -154,7 +154,7 @@ Click the failed entity.
 ![](images/provisioning-failure-detail.png)
 
 :::tip
-It's quite possible some group names are reserved, either in AD or AWS SSO. "Administrator" could be one of those. Let's add a new group "SRE' and see what happens.
+It's quite possible some group names are reserved, either in AD or AWS SSO. "Administrator" could be one of those. Let's add a new group "SRE" and see what happens.
 :::
 
 Bingo.

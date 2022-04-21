@@ -56,7 +56,7 @@ cdk ls
 
 The CDN stack requires the following configuration.
 
-In `config/common-config.ts`, change the common configuration values to your domain. With the current version, the apex domain for publishing documentation.
+In `config/common-config.ts`, change the common configuration values to your domain. Provide the apex domain for publishing documentation and finding the DNS records. Provide the full hostname for the CDN.
 
 ```ts
 const bareMetalConfig: BareMetalConfig = {
@@ -71,11 +71,38 @@ const bareMetalConfig: BareMetalConfig = {
 cdk deploy BareMetalCdn
 ```
 
+It'll take a little time because setting up a CDN means configuring edge locations.
+
 ## Resources
 
-Blah.
+The stack created the following resources.
 
-## Verification
+| Resource | AWS Resource Type | Description |
+| --- | --- | --- |
+| DNS A record | `AWS::Route53::RecordSet` | The entry in the `HostedZone` for the apex domain you configured. |
+| SSL certificate | `AWS::CertificateManager::Certificate` | The SSL certificate you created for the CDN hostname. |
+| Cloudwatch alarm | `AWS::CloudWatch::Alarm` | Notification before the certificate expires. |
+| Content Delivery Network | `AWS::CloudFront::Distribution` | Configuration for edge locations, origin, rules. | 
+| S3 Bucket | `AWS::S3::Bucket` | The origin. This is where you copy images, CSS, JS and the like so that it will appear at edge locations. |
+| S3 Bucket origin policy | AWS::S3::BucketPolicy | A cheeky policy on the bucket that protects access to objects in the bucket even if they're public. It does this by restricting access via a CloudFront user principal.
 
-Blah.
+## Verification and Usage
+
+Easy.
+
+:::info action
+Copy an asset like an image to the Bucket.
+
+You can do this via the [AWS CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html#examples).
+:::
+
+Paths in the S3 Bucket are honored, so you append the full path of the S3 Object to the CDN endpoint.
+
+For example, if you copied the image `abbey-road.jpg` to the root location in S3, that image is `http://cdn.baremetal.help/abbey-road.jpg` without a path. Those are musicians from my home planet, London.
+
+![](images/beatles.png)
+
+Error messages for missing assets are obnoxious XML. But at least you get a [403 HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) status. 
+
+![](images/cdn-403.png)
 

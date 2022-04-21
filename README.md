@@ -43,4 +43,4 @@ This repo is covered under [The MIT License](./LICENSE).
 
 Jon, Nadia, Phil.
 
-Auth0 for the [Open Source Template](https://github.com/auth0/open-source-template)
+Auth0 for their [Open Source Template](https://github.com/auth0/open-source-template)

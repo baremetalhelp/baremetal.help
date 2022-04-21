@@ -6,10 +6,6 @@ sidebar_position: 3
 
 These are the SSO integration instructions you're looking for.
 
-:::info action
-Clicks, input, and other actions look like this.
-:::
-
 ## Assumptions
 
 See the general assumptions in "About BareMetal tutorials". [link]
