@@ -1,4 +1,7 @@
-// This is an OU hierarchy in code just for fun. Horrendous.
+// This is an OU hierarchy in code just for fun and it's horrendous. Just because you understand
+// the type system, doesn't mean it's a good fit.
+// 
+// So much easier to read the YAML equivalent.
 //
 export type OU_TREE = { [key: string]: OU[] };
 export type OU = string | OU_TREE;

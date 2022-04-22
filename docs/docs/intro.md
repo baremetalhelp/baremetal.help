@@ -12,6 +12,8 @@ For example, to create a Single Sign-On integration in AWS, we do not assume you
 
 :::info action
 Clicks, input, and other actions look like this.
+
+In the left menu, ✅ means the tutorial is complete. ⏲ means it'll be ready shortly.
 :::
 
 ## A Quick Example

@@ -4,23 +4,14 @@ sidebar_position: 3
 
 # Create AWS Organization
 
-Blah
+An [AWS Organization](https://aws.amazon.com/organizations/) is how multiple AWS Accounts are organized into a group hierarchy, Organization Units. This is required for SSO to work.
 
-## Assumptions
+## You Have Good Options
 
-See the general assumptions in "About BareMetal tutorials".
+There are several good tools and a lot of good documentation about managing AWS Accounts. 
 
-In addition
-1. ... TBD
+[AWS ControlTower](https://aws.amazon.com/controltower/?control-blogs.sort-by=item.additionalFields.createdDate&control-blogs.sort-order=desc) is a good effort, but there's no CLI access. However, many enterprises use ControlTower.
 
-## The result
+[Account Factory for Terraform](https://docs.aws.amazon.com/controltower/latest/userguide/aft-architecture.html) (AFT) is a newer addition and is pretty good. Take a look at the walk through and video to see if it's right for you. We think AFT's complexity is a good match for larger enterprises.
 
-1. Blah
-
-## Resources
-
-Blah.
-
-## Verification
-
-Blah.
+[`org-formation`](https://github.com/org-formation/org-formation-cli) is an infrastructure-as-code approach that's quite clever.
