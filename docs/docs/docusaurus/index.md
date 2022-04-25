@@ -4,30 +4,37 @@ sidebar_position: 3
 
 # BareMetal Documentation
 
-This documentation is the the `docs` folder. We're using the Docusaurus tool [link]. Here are instructions for creating your own documentation like this from BareMetal.
+The entire documentation for this website is the `docs` folder. We're using [Docusaurus](https://docusaurus.io/). Full documentation there.
 
 ## Assumptions
 
 See the general assumptions in "About BareMetal tutorials".
 
-In addition
-1. ... TBD
+## Deploy
 
-## The result
+`cd docs` to put you in the right place.
 
-You'll have the following resources
-1. A fully-working documentation site from a standard template.
-1. The ability to run and make changes locally, where you can see changes immediately.
-1. A bash command to publish the site to GitHub Pages [link]. 
-1. Instructions for setting up GitHub Pages in your repo. (You can do this on the command line with a bit of setup. Sometimes click-ops is simpler.)
-1. DNS entries that GitHub Pages require to point your domain at the right repo and branch.
+`yarn` (no args needed) to install dependencies.
 
-## Resources
+`yarn start` to pull up a local version at <http://localhost:3000/>.
 
-Blah.
+`yarn deploy` to push to GitHub Pages.
 
-## Verification
+## Things to Watch Out For
 
-Blah.
+There's a file `CNAME` in the docs directory that contains the domain name where you want to see your documentation. GitHub Pages uses the DNS for this domain to configure hosting.
 
+Make sure you know how to configure the right kind of domain for hosting GitHub Pages. You can pick either an apex domain, like `baremetal.help`, or a subdomain like `docs.baremetal.help`. This repo configures an apex domain.
 
+See [About custom domains and GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages) in the GitHub documentation.
+
+## The Full DNS Step-by-Step
+
+Here's the short version of the above GitHub instructions.
+
+:::info action
+Add the right A record to DNS. 
+
+GitHub Pages expects a DNS Alias record mapping your apex domain to four specific IP address, `185.199.108.153` and others like it.
+
+You also need a CNAME record for `www.baremetal.help`[^1]
