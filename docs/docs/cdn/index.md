@@ -2,11 +2,35 @@
 sidebar_position: 5
 ---
 
+```mdx-code-block
+import BrowserWindow from '@site/src/components/BrowserWindow';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 # BareMetal CDN
 
 We're going to build a Content Delivery Network, CDN, from scratch. A CDN serves web objects like images from locations that are geographically close to consumers. That means better latency for users and less load on your resources. It's a very common pattern.
 
 CDNs cache too. So you only need to copy the original to one place (the _origin_) and the CDN takes care of copying to edge locations on a cache miss. Origin is an S3 Bucket, but could be an API.
+
+You'll need
+- This repo, https://github.com/baremetalhelp/baremetal.help
+- [CDK CLI](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) and credentials
+- [CDK bootstrap](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) in your AWS account
+
+## Quick Start
+
+Add configuration to `config/common-config.ts`.
+
+```ts
+const bareMetalConfig: BareMetalConfig = {
+  domainName: "example.com",
+  cdnEndpoint: "cdn.example.com",
+};
+```
+
+Deploy `cdk deploy BareMetalCdn`.
 
 ## Architecture
 

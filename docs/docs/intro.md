@@ -18,7 +18,7 @@ In the left menu, ✅ means the tutorial is complete. ⏲ means it'll be ready s
 
 ## A Quick Example
 
-We mean it when we say we give you infrastructure-as-code for all the things. Not only that, we imbue them with secure-by-default best practices and convenience you'll like. For example, here's the infra-as-code (this happens to be written in TypeScript using [AWS Cloud Development Kit, CDK](https://aws.amazon.com/cdk/)) for your Content Delivery Network, CDN.
+We mean it when we say we give you infrastructure-as-code for all the things. Not only that, we imbue them with secure-by-default best practices and convenience you'll like. For example, here's some infra-as-code for your Content Delivery Network, CDN. This happens to be written in TypeScript using [AWS Cloud Development Kit, CDK](https://aws.amazon.com/cdk/).
 
 ```ts
     ...

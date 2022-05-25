@@ -15,11 +15,15 @@
         "typecheck": "tsc"
     },
     "dependencies": {
+        "@chakra-ui/react": "^1.8.8",
         "@docusaurus/core": "2.0.0-beta.18",
         "@docusaurus/preset-classic": "2.0.0-beta.18",
+        "@emotion/react": "^11",
+        "@emotion/styled": "^11",
         "@fontsource/open-sans": "^4.5.8",
         "@mdx-js/react": "^1.6.22",
         "clsx": "^1.1.1",
+        "emotion-theming": "^11.0.0",
         "framer-motion": "^6",
         "mdx-mermaid": "^1.2.2",
         "mermaid": "^8.14.0",

@@ -36,5 +36,5 @@ export const GLOBAL_TAGS: { [key: string]: string } = {
 export const REQUIRED_TAGS: { [key: string]: string } = {
     repo: "The GitHub (Enterprise) for this repo",
     owner: "Email, Slack channel, department ID or similar",
-    environment: "Usually prod, preprod, sandbox, dev or similar",
+    environment: "Usually prod, pre-production, sandbox, development or similar",
 };
