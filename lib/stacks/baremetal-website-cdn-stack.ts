@@ -16,21 +16,20 @@ import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
 import { S3 } from "cdk-iam-floyd";
 import { Construct } from "constructs";
-const { Statement } = require("cdk-iam-floyd");
 
-export interface BareMetalCdnStackProps extends StackProps {
+export interface BareMetalWebsiteCdnStackProps extends StackProps {
     domainName: string;
     subDomainName: string;
 }
 
-export class BareMetalCdnStack extends Stack {
+export class BareMetalWebsiteCdnStack extends Stack {
     readonly siteBucketName: string;
     readonly distributionId: string;
 
     constructor(
         scope: Construct,
         name: string,
-        props: BareMetalCdnStackProps
+        props: BareMetalWebsiteCdnStackProps
     ) {
         super(scope, name);
 
@@ -41,7 +40,6 @@ export class BareMetalCdnStack extends Stack {
         const siteDomain = subDomainName + "." + domainName;
         const cloudfrontOAI = new OriginAccessIdentity(this, "cloudfront-oai");
         const siteBucket = new Bucket(this, "site-bucket", {
-            bucketName: siteDomain,
             publicReadAccess: false,
             blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
         });
@@ -89,6 +87,9 @@ export class BareMetalCdnStack extends Stack {
             zone,
         });
 
+        this.siteBucketName = siteBucket.bucketName;
+        this.distributionId = distribution.distributionId;
+
         // Do this in GitHub actions
         //
         // const siteBucket = Bucket.fromBucketName(this, "site-bucket", this.siteBucketName)
@@ -104,8 +105,5 @@ export class BareMetalCdnStack extends Stack {
         //     distribution,
         //     distributionPaths: ["/*"],
         // });
-
-        this.siteBucketName = siteBucket.bucketName;
-        this.distributionId = distribution.distributionId;
     }
 }

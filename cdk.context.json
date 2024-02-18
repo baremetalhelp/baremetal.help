@@ -18,5 +18,49 @@
     "us-east-1d",
     "us-east-1e",
     "us-east-1f"
-  ]
+  ],
+  "vpc-provider:account=607477397669:filter.tag:Name=baremetal-vpc:region=us-east-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0ed98ee43d0f8f7d9",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "ownerAccountId": "607477397669",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-073f1cf63ecd4a61c",
+            "cidr": "10.0.128.0/18",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-0c83c29d76cdb89a1"
+          },
+          {
+            "subnetId": "subnet-0619a34659fac009b",
+            "cidr": "10.0.192.0/18",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-08c3b372ee41b9977"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-07e245263ca925653",
+            "cidr": "10.0.0.0/18",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-03e47882d2c5b1109"
+          },
+          {
+            "subnetId": "subnet-0c5457377a7c628e6",
+            "cidr": "10.0.64.0/18",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-00e16654ae0f9ebb4"
+          }
+        ]
+      }
+    ]
+  }
 }

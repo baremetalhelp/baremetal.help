@@ -10,7 +10,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: "BareMetal™ Help",
-    tagline: "Zero to Hero for enterprise-grade cloud infrastructure",
+    tagline: "Enterprise-grade cloud infrastructure from bare metal",
     url: "https://baremetal.help",
     baseUrl: "/",
     onBrokenLinks: "throw",
@@ -39,55 +39,61 @@ const config = {
     ],
 
     themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+        /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         ({
-        navbar: {
-            title: "BareMetal Help",
-            logo: {
-                alt: "My Site Logo",
-                src: "img/logo.png",
-            },
-            items: [{
-                    type: "doc",
-                    docId: "intro",
-                    position: "left",
-                    label: "Tutorials",
+            navbar: {
+                title: "BareMetal Help",
+                logo: {
+                    alt: "My Site Logo",
+                    src: "img/logo.png",
                 },
-                {
-                    href: "https://github.com/baremetalhelp/baremetal.help",
-                    label: "GitHub",
-                    position: "right",
-                },
-                {
-                    type: "search",
-                    position: "right",
-                },
-            ],
-        },
-        footer: {
-            style: "dark",
-            links: [{
-                    title: "Docs",
-                    items: [{
+                items: [
+                    {
+                        type: "doc",
+                        docId: "intro",
+                        position: "left",
                         label: "Tutorials",
-                        to: "/docs/intro",
-                    }, ],
-                },
-                {
-                    title: "More",
-                    items: [{
-                        label: "GitHub",
+                    },
+                    {
                         href: "https://github.com/baremetalhelp/baremetal.help",
-                    }, ],
-                },
-            ],
-            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, support@baremetal.help`,
-        },
-        prism: {
-            theme: lightCodeTheme,
-            darkTheme: darkCodeTheme,
-        },
-    }),
+                        label: "GitHub",
+                        position: "right",
+                    },
+                    {
+                        type: "search",
+                        position: "right",
+                    },
+                ],
+            },
+            footer: {
+                style: "dark",
+                links: [
+                    {
+                        title: "Docs",
+                        items: [
+                            {
+                                label: "Tutorials",
+                                to: "/docs/intro",
+                            },
+                        ],
+                    },
+                    {
+                        title: "More",
+                        items: [
+                            {
+                                label: "GitHub",
+                                href: "https://github.com/baremetalhelp/baremetal.help",
+                            },
+                        ],
+                    },
+                ],
+                copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, support@baremetal.help`,
+            },
+            prism: {
+                theme: lightCodeTheme,
+                darkTheme: darkCodeTheme,
+            },
+        }),
 };
 
 module.exports = config;

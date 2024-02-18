@@ -6,11 +6,6 @@ import {
     RecordTarget,
 } from "aws-cdk-lib/aws-route53";
 import { Construct } from "constructs";
-import { BareMetalConfig } from "../model";
-
-export interface BareMetalGitHubPagesStackProps extends StackProps {
-    commonConfig: BareMetalConfig;
-}
 
 const GITHUB_PAGES_IP_ADDRESSES = [
     "185.199.108.153",
@@ -19,15 +14,16 @@ const GITHUB_PAGES_IP_ADDRESSES = [
     "185.199.111.153",
 ];
 
+export interface BareMetalGitHubPagesStackProps extends StackProps {
+    domainName: string;
+    gitHubUser: string;
+}
+
 export class BareMetalGitHubPagesStack extends Stack {
-    constructor(
-        scope: Construct,
-        id: string,
-        props: BareMetalGitHubPagesStackProps
-    ) {
+    constructor(scope: Construct, id: string, props: BareMetalGitHubPagesStackProps) {
         super(scope, id, props);
 
-        const { domainName, gitHubUser } = props.commonConfig;
+        const { domainName, gitHubUser } = props;
 
         if (!domainName || !gitHubUser) {
             throw Error(

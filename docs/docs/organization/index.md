@@ -4,23 +4,31 @@ sidebar_position: 3
 
 # Create AWS Organization
 
-An [AWS Organization](https://aws.amazon.com/organizations/) is how multiple AWS Accounts are organized into a group hierarchy, with Accounts under Organization Units. This is required for SSO to work.
+An [AWS Organization](https://aws.amazon.com/organizations/) is how multiple AWS Accounts are organized into a group hierarchy, with Accounts under Organization Units. Grouping accounts like this makes securing different kinds of accounts — like production and QA — easier and more repeatable.
 
 :::warning
-The tools for creating an organization can be complex and finicky. Each has a lot of ground to cover before you're up and running with an AWS Organization.
+The tools for creating an organization are generally complex and finicky. Each solution has a lot of preparation to take care of before you're up and running with an AWS Organization.
 
-If you're not ready to invest the time it'll take to create an AWS Organization using the tools below, you can always create one by hand to get you going. When you feel it's appropriate, you can always recreate the AWS Organization with the tool you want.
+If you're not ready to invest the time it'll take to create an AWS Organization using the tools below, you can always create one by hand in the AWS console to get you going. When you feel it's appropriate, you can always recreate the AWS Organization with the tool you want.
 
 This is probably not what you wanted to hear.
 :::
 
+:::note recommendation
+Do it by hand in the AWS console: It's way easier. 
+
+If you're just starting out in the cloud from bare metal, the chances are you won't have so many accounts to organize.
+
+This is probably what you wanted to hear.
+:::
+
 ## Quick Start
 
-There is no quick start. There are no push-button solutions. 
+There is no quick start. There are no comprehensive push-button solutions. You can get one started using the [console or CLI](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_create.html). 
 
-## You Have Good Options
+## Some Options
 
-There are several good tools and a lot of good documentation already written about managing AWS Accounts. 
+There are several tools to manage AWS Accounts and the AWS Organization they live in.  
 
 [AWS ControlTower](https://aws.amazon.com/controltower/?control-blogs.sort-by=item.additionalFields.createdDate&control-blogs.sort-order=desc) is a good effort, but there's no CLI access. However, many enterprises use ControlTower.
 

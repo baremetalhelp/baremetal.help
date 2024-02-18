@@ -52,11 +52,11 @@ function Feature({ title, image, description }: FeatureItem) {
             <div className="text--center padding-horiz--md">
                 <h3>{title}</h3>
             </div>
-            <div className="text--center">
-                <img src={image} />
-            </div>
             <div className="text--center padding-horiz--md">
                 <p>{description}</p>
+            </div>
+            <div className="text--center">
+                <img src={image} />
             </div>
         </div>
     );

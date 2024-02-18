@@ -4,12 +4,11 @@ sidebar_position: 3
 
 # SSO Landing Zone 
 
-:::warning
-This page has multiple issues.
+:::warning This page has multiple issues.
 
-- [ ] The preamble is too wordy.
-- [ ] It does not describe the what and how to make the landing zone very well.
-- [ ] There's no debugging help.
+- [ ] The preamble is too wordy and not very good.
+- [ ] It does not describe the what the landing zone is and how to make it very well.
+- [ ] There's no help for resolving common issues.
 :::
 
 Single Sign-On provides a way to associate users and groups in the enterprise. Usually, this delegates to something like Active Directory.

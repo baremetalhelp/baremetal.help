@@ -7,18 +7,9 @@ import {
     CodeArtifactExternalConnections,
     PrivateRepositories,
 } from "../../config";
-import { BareMetalConfig } from "../model";
 
-export interface BareMetalArtifactRepoStackProps extends StackProps {
-    commonConfig: BareMetalConfig;
-}
-
-export class BareMetalArtifactRepoStack extends Stack {
-    constructor(
-        scope: Construct,
-        id: string,
-        props: BareMetalArtifactRepoStackProps
-    ) {
+export class BareMetalCodeArtifactStack extends Stack {
+    constructor(scope: Construct, id: string, props: StackProps) {
         super(scope, id, props);
 
         const stack = Stack.of(this);
@@ -36,7 +27,7 @@ export class BareMetalArtifactRepoStack extends Stack {
                 .toStatementJson(),
         };
 
-        const domain = new CfnDomain(this, "domain", {
+        const domain = new CfnDomain(this, `${id}-domain`, {
             domainName: "repo",
             permissionsPolicyDocument: domainPermissionsPolicyDocument,
         });
