@@ -16,14 +16,23 @@ const GITHUB_PAGES_IP_ADDRESSES = [
 
 export interface BareMetalGitHubPagesStackProps extends StackProps {
     domainName: string;
+    subDomainName?: string;
     gitHubUser: string;
 }
 
 export class BareMetalGitHubPagesStack extends Stack {
-    constructor(scope: Construct, id: string, props: BareMetalGitHubPagesStackProps) {
+    constructor(
+        scope: Construct,
+        id: string,
+        props: BareMetalGitHubPagesStackProps
+    ) {
         super(scope, id, props);
 
-        const { domainName, gitHubUser } = props;
+        const { domainName, subDomainName, gitHubUser } = props;
+
+        const recordName = subDomainName
+            ? `${subDomainName}.${domainName}`
+            : domainName;
 
         if (!domainName || !gitHubUser) {
             throw Error(
@@ -37,7 +46,7 @@ export class BareMetalGitHubPagesStack extends Stack {
 
         const alias = new ARecord(this, "alias", {
             zone: hostedZone,
-            recordName: "baremetal.help",
+            recordName,
             target: RecordTarget.fromIpAddresses(...GITHUB_PAGES_IP_ADDRESSES),
         });
 

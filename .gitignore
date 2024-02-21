@@ -3,5 +3,9 @@
 node_modules
 cdk.out
 
+.DS_Store
+
 # *.d.ts
 # *.js
+
+cdk.context.json

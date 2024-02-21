@@ -14,22 +14,22 @@ import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { ARecord, HostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
-import { S3 } from "cdk-iam-floyd";
+import { Statement } from "cdk-iam-floyd";
 import { Construct } from "constructs";
 
-export interface BareMetalWebsiteCdnStackProps extends StackProps {
+export interface BareMetalWebsiteStackProps extends StackProps {
     domainName: string;
     subDomainName: string;
 }
 
-export class BareMetalWebsiteCdnStack extends Stack {
+export class BareMetalWebsiteStack extends Stack {
     readonly siteBucketName: string;
     readonly distributionId: string;
 
     constructor(
         scope: Construct,
         name: string,
-        props: BareMetalWebsiteCdnStackProps
+        props: BareMetalWebsiteStackProps
     ) {
         super(scope, name);
 
@@ -44,7 +44,7 @@ export class BareMetalWebsiteCdnStack extends Stack {
             blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
         });
         siteBucket.addToResourcePolicy(
-            new S3()
+            new Statement.S3()
                 .allow()
                 .toGetObject()
                 .on(siteBucket.arnForObjects("*"))

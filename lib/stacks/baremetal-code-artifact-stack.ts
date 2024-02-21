@@ -1,93 +1,89 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { CfnDomain, CfnRepository } from "aws-cdk-lib/aws-codeartifact";
-import { AccountRootPrincipal } from "aws-cdk-lib/aws-iam";
-import { Codeartifact } from "cdk-iam-floyd";
-import { Construct } from "constructs";
 import {
-    CodeArtifactExternalConnections,
-    PrivateRepositories,
-} from "../../config";
+    AccountRootPrincipal,
+    OrganizationPrincipal,
+    PolicyDocument,
+} from "aws-cdk-lib/aws-iam";
+import { Statement } from "cdk-iam-floyd";
+import { Construct } from "constructs";
 
+export interface BareMetalCodeArtifactStackProps extends StackProps {
+    domainName: string;
+    organizationId: string;
+}
 export class BareMetalCodeArtifactStack extends Stack {
-    constructor(scope: Construct, id: string, props: StackProps) {
+    constructor(
+        scope: Construct,
+        id: string,
+        props: BareMetalCodeArtifactStackProps
+    ) {
         super(scope, id, props);
 
+        const { domainName, organizationId } = props;
         const stack = Stack.of(this);
 
-        const domainPermissionsPolicyDocument = {
-            Statement: new Codeartifact()
-                .allow()
-                .toCreateRepository()
-                .toCreateDomain()
-                .toGetAuthorizationToken()
-                .toGetDomainPermissionsPolicy()
-                .toListRepositoriesInDomain()
-                .forCdkPrincipal(new AccountRootPrincipal())
-                .onAllResources()
-                .toStatementJson(),
-        };
+        const domainPermissionsPolicyDocument = new PolicyDocument({
+            statements: [
+                new Statement.Codeartifact()
+                    .allow()
+                    .toCreateRepository()
+                    .toCreateDomain()
+                    .toGetAuthorizationToken()
+                    .toGetDomainPermissionsPolicy()
+                    .toListRepositoriesInDomain()
+                    .forCdkPrincipal(new AccountRootPrincipal())
+                    .onAllResources(),
+            ],
+        });
 
-        const domain = new CfnDomain(this, `${id}-domain`, {
-            domainName: "repo",
+        const domain = new CfnDomain(this, "domain", {
+            domainName,
             permissionsPolicyDocument: domainPermissionsPolicyDocument,
         });
 
-        const repositoryPermissionsPolicyDocument = {
-            Statement: new Codeartifact()
-                .allow()
-                .toDescribePackageVersion()
-                .toDescribeRepository()
-                .toGetPackageVersionReadme()
-                .toGetRepositoryEndpoint()
-                .toListPackageVersionAssets()
-                .toListPackageVersionDependencies()
-                .toListPackageVersions()
-                .toListPackages()
-                .toPublishPackageVersion()
-                .toPutPackageMetadata()
-                .toReadFromRepository()
-                .forCdkPrincipal(new AccountRootPrincipal())
-                .onAllResources()
-                .toStatementJson(),
+        // // Permissions for any account in the organization
+        // //
+        const repositoryPermissionsPolicyDocument = new PolicyDocument({
+            statements: [
+                new Statement.Codeartifact()
+                    .allow()
+                    .toDescribePackageVersion()
+                    .toDescribeRepository()
+                    .toGetPackageVersionReadme()
+                    .toGetRepositoryEndpoint()
+                    .toListPackageVersionAssets()
+                    .toListPackageVersionDependencies()
+                    .toListPackageVersions()
+                    .toListPackages()
+                    .toPublishPackageVersion()
+                    .toPutPackageMetadata()
+                    .toReadFromRepository()
+                    .forCdkPrincipal(new OrganizationPrincipal(organizationId))
+                    .onAllResources(),
+            ],
+        });
+
+        const repositories: { [key: string]: string } = {
+            npmjs: "public:npmjs",
+            maven: "public:maven-central",
+            pypi: "public:pypi",
+            "maven-google-android": "public:maven-googleandroid",
+            "gradle-plugins": "public:maven-gradleplugins",
+            "maven-commonsware": "public:maven-commonsware",
+            nuget: "public:nuget-org",
+            clojars: "public:maven-clojars",
         };
 
-        // Make repos for all the external connections
-        //
-        Object.values(CodeArtifactExternalConnections).forEach(
-            (externalConnection) => {
-                const repositoryName = this.repoNameFor(externalConnection);
-
-                new CfnRepository(this, repositoryName, {
-                    domainName: domain.attrName,
-                    repositoryName,
-                    domainOwner: stack.account,
-                    permissionsPolicyDocument:
-                        repositoryPermissionsPolicyDocument,
-                    externalConnections: [externalConnection],
-                });
-            }
-        );
-
-        // Make local repos just for the ones we want, referring to the relevant external one
-        //
-        PrivateRepositories.forEach((repository) => {
-            const repositoryName = "local-" + this.repoNameFor(repository);
-
-            new CfnRepository(this, repositoryName, {
-                domainName: domain.attrName,
+        for (let repositoryName in repositories) {
+            const repository = new CfnRepository(this, repositoryName, {
+                domainName: domain.domainName,
                 repositoryName,
+                externalConnections: [repositories[repositoryName]],
                 domainOwner: stack.account,
                 permissionsPolicyDocument: repositoryPermissionsPolicyDocument,
-                upstreams: [this.repoNameFor(repository)],
             });
-        });
-    }
-
-    private repoNameFor(repository: CodeArtifactExternalConnections) {
-        // Remove common "public:" and remove punctuation
-        //
-        return `repository-${repository}`
-            .replace("public:", "")
-            .replace(/[\W]+/g, "_");
+            repository.addDependency(domain);
+        }
     }
 }

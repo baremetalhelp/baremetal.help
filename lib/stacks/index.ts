@@ -6,4 +6,4 @@ export * from "./baremetal-ecs-stack";
 export * from "./baremetal-github-pages-stack";
 export * from "./baremetal-landing-zone-stack";
 export * from "./baremetal-vpc-stack";
-export * from "./baremetal-website-cdn-stack";
+export * from "./baremetal-website-stack";

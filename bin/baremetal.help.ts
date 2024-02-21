@@ -4,7 +4,6 @@ import {
     DNS_TXT_RECORDS as dnsTxtRecords,
     COMMON_TAGS as tags,
 } from "../config";
-
 import {
     BareMetalBatchStack,
     BareMetalCdnStack,
@@ -12,9 +11,7 @@ import {
     BareMetalDnsStack,
     BareMetalEcsStack,
     BareMetalGitHubPagesStack,
-    BareMetalLandingZoneStack,
-    BareMetalVpcStack,
-    BareMetalWebsiteCdnStack,
+    BareMetalVpcStack
 } from "../lib/stacks";
 
 const env: Environment = {
@@ -22,14 +19,11 @@ const env: Environment = {
     region: process.env.CDK_DEFAULT_REGION,
 };
 
-console.log(
-    `Deploying to ${env.account} in ${env.region} with tags ${JSON.stringify(
-        tags
-    )}`
-);
-
-const domainName = "baremetal.help";
-const vpcName = "baremetal-vpc";
+const enterpriseName = "baremetal";
+const tld = "help";
+const organizationId = "o-d987217uy4";
+const domainName = `${enterpriseName}.${tld}`;
+const vpcName = `${enterpriseName}-vpc`;
 
 const app = new App();
 
@@ -39,43 +33,45 @@ const app = new App();
  * Say `cdk deploy BareMetalCdn` and so on to deploy just one. You almost certainly don't want to deploy
  * them all at once because you probably don't need them all.
  */
-
-new BareMetalCdnStack(app, "BareMetalCdnStack", {
+new BareMetalCdnStack(app, "BareMetalCdn", {
     env,
     tags,
     domainName,
     subDomainName: "cdn",
 });
 
-new BareMetalWebsiteCdnStack(app, "BareMetalWebsiteCdnStack", {
-    env,
-    tags,
-    domainName,
-    subDomainName: "www",
-});
+// new BareMetalWebsiteStack(app, "BareMetalWebsite", {
+//     env,
+//     tags,
+//     domainName,
+//     subDomainName: "www",
+// });
 
-new BareMetalGitHubPagesStack(app, "BareMetalGitHubPagesStack", {
+new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", {
     env,
     tags,
     domainName,
+    subDomainName: "abcdef",
     gitHubUser: "baremetalhelp",
 });
 
-new BareMetalLandingZoneStack(app, "BareMetalLandingZoneStack", {
+// new BareMetalLandingZoneStack(app, "BareMetalLandingZone", {
+//     env,
+//     tags,
+//     ssoInstanceArn: "arn:aws:sso:::instance/ssoins-722348d4ba8b2b4e",
+// });
+
+new BareMetalCodeArtifactStack(app, "BareMetalCodeArtifact", {
     env,
     tags,
-    ssoInstanceArn: "arn:aws:sso:::instance/ssoins-722348d4ba8b2b4e",
+    domainName: enterpriseName,
+    organizationId,
 });
 
-new BareMetalCodeArtifactStack(app, "BareMetalCodeArtifactStack", {
+new BareMetalDnsStack(app, "BareMetalDns", {
     env,
     tags,
-});
-
-new BareMetalDnsStack(app, "BareMetalDnsStack", {
-    env,
-    tags,
-    domainName: "baremetal.help",
+    domainName,
     dnsTxtRecords,
 });
 
@@ -83,6 +79,8 @@ const vpcStack = new BareMetalVpcStack(app, "BareMetalVpc", {
     env,
     tags,
     vpcName,
+    maxAzs: 4,
+    natGateways: 1,
 });
 const { vpc } = vpcStack;
 
@@ -95,9 +93,12 @@ const ecsStack = new BareMetalEcsStack(app, "BareMetalEcs", {
 ecsStack.addDependency(vpcStack);
 
 const batchStack = new BareMetalBatchStack(app, "BareMetalBatch", {
+    env,
+    tags,
     vpc,
 });
 batchStack.addDependency(vpcStack);
+
 
 // TODO
 // export useful properties
@@ -118,4 +119,6 @@ batchStack.addDependency(vpcStack);
 // Show how SCPs can be applied to OUs
 // Make all shell command a :::note action box
 // Batch processing stack
+// Convert all policies to iam-floyd
+// Migrate to AWS solutions constructs where possible https://github.com/awslabs/aws-solutions-constructs/tree/main/source/patterns/%40aws-solutions-constructs
 //

@@ -14,9 +14,8 @@ import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { ARecord, HostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
-import { S3 } from "cdk-iam-floyd";
+import { Statement } from "cdk-iam-floyd";
 import { Construct } from "constructs";
-const { Statement } = require("cdk-iam-floyd");
 
 export interface BareMetalCdnStackProps extends StackProps {
     domainName: string;
@@ -27,26 +26,28 @@ export class BareMetalCdnStack extends Stack {
     readonly siteBucketName: string;
     readonly distributionId: string;
 
-    constructor(
-        scope: Construct,
-        name: string,
-        props: BareMetalCdnStackProps
-    ) {
+    constructor(scope: Construct, name: string, props: BareMetalCdnStackProps) {
         super(scope, name);
 
         const { domainName, subDomainName } = props;
-        const zone = HostedZone.fromLookup(this, "hosted-zone", {
-            domainName: props.domainName,
+
+        // TODO: HZ lookup failing from domain name
+        //
+        const zone = HostedZone.fromHostedZoneAttributes(this, "hosted-zone", {
+            hostedZoneId: "Z02074912A2SG31RKK387",
+            zoneName: domainName,
         });
+        // const zone = HostedZone.fromLookup(this, "hosted-zone", {
+        //     domainName
+        // });
         const siteDomain = subDomainName + "." + domainName;
         const cloudfrontOAI = new OriginAccessIdentity(this, "cloudfront-oai");
         const siteBucket = new Bucket(this, "site-bucket", {
-            bucketName: siteDomain,
             publicReadAccess: false,
             blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
         });
         siteBucket.addToResourcePolicy(
-            new S3()
+            new Statement.S3()
                 .allow()
                 .toGetObject()
                 .on(siteBucket.arnForObjects("*"))
@@ -55,13 +56,13 @@ export class BareMetalCdnStack extends Stack {
                 )
         );
 
-        const certificate = new Certificate(this, "SiteCertificate", {
+        const certificate = new Certificate(this, "certificate", {
             domainName: siteDomain,
             validation: CertificateValidation.fromDns(zone),
         });
 
-        const distribution = new Distribution(this, "SiteDistribution", {
-            certificate: certificate,
+        const distribution = new Distribution(this, "distribution", {
+            certificate,
             defaultRootObject: "index.html",
             domainNames: [siteDomain],
             minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
@@ -83,29 +84,29 @@ export class BareMetalCdnStack extends Stack {
             },
         });
 
-        new ARecord(this, "SiteAliasRecord", {
+        new ARecord(this, "alias", {
             recordName: siteDomain,
             target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
             zone,
         });
 
-        // Do this in GitHub actions
-        //
-        // const siteBucket = Bucket.fromBucketName(this, "site-bucket", this.siteBucketName)
-        // const distribution = Distribution.fromDistributionAttributes(this, "distribution", {
-        //     distributionId: this.distributionId,
-        //     domainName: siteDomain,
-        // })
-        // new BucketDeployment(this, "deployment", {
-        //     sources: [
-        //         Source.asset(path.join(__dirname, "./site-contents")),
-        //     ],
-        //     destinationBucket: siteBucket,
-        //     distribution,
-        //     distributionPaths: ["/*"],
-        // });
+        // // Do this in GitHub actions
+        // //
+        // // const siteBucket = Bucket.fromBucketName(this, "site-bucket", this.siteBucketName)
+        // // const distribution = Distribution.fromDistributionAttributes(this, "distribution", {
+        // //     distributionId: this.distributionId,
+        // //     domainName: siteDomain,
+        // // })
+        // // new BucketDeployment(this, "deployment", {
+        // //     sources: [
+        // //         Source.asset(path.join(__dirname, "./site-contents")),
+        // //     ],
+        // //     destinationBucket: siteBucket,
+        // //     distribution,
+        // //     distributionPaths: ["/*"],
+        // // });
 
-        this.siteBucketName = siteBucket.bucketName;
-        this.distributionId = distribution.distributionId;
+        // this.siteBucketName = siteBucket.bucketName;
+        // this.distributionId = distribution.distributionId;
     }
 }
