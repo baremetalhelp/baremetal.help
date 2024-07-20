@@ -7,6 +7,8 @@ import {
 } from "aws-cdk-lib/aws-route53";
 import { Construct } from "constructs";
 
+// Well-know IP addresses git GitHub Pages
+//
 const GITHUB_PAGES_IP_ADDRESSES = [
     "185.199.108.153",
     "185.199.109.153",
@@ -40,18 +42,18 @@ export class BareMetalGitHubPagesStack extends Stack {
             );
         }
 
-        const hostedZone = HostedZone.fromLookup(this, "hostedzone", {
+        const zone = HostedZone.fromLookup(this, "hostedzone", {
             domainName,
         });
 
         const alias = new ARecord(this, "alias", {
-            zone: hostedZone,
+            zone,
             recordName,
             target: RecordTarget.fromIpAddresses(...GITHUB_PAGES_IP_ADDRESSES),
         });
 
         const cname = new CnameRecord(this, "cname", {
-            zone: hostedZone,
+            zone,
             domainName: `${gitHubUser}.github.io`,
             recordName: "www",
         });

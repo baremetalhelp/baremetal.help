@@ -106,7 +106,7 @@ export class BareMetalCdnStack extends Stack {
         // //     distributionPaths: ["/*"],
         // // });
 
-        // this.siteBucketName = siteBucket.bucketName;
-        // this.distributionId = distribution.distributionId;
+        this.siteBucketName = siteBucket.bucketName;
+        this.distributionId = distribution.distributionId;
     }
 }

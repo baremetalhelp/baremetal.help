@@ -15,11 +15,11 @@
     "devDependencies": {
         "@types/jest": "^29.5.12",
         "@types/node": "^20.11.19",
-        "@types/uuid": "^9.0.8",
+        "@types/uuid": "^10.0.0",
         "@typescript-eslint/eslint-plugin": "^7.0.1",
         "@typescript-eslint/parser": "^7.0.1",
         "aws-cdk": "^2.128.0",
-        "eslint": "^8.56.0",
+        "eslint": "^9.7.0",
         "eslint-config-standard": "^17.1.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-node": "^11.1.0",
@@ -32,9 +32,9 @@
     },
     "dependencies": {
         "@types/js-yaml": "^4.0.9",
-        "aws-cdk-lib": "^2.128.0",
+        "aws-cdk-lib": "^2.2.202",
         "cdk-constants": "^3.0.3",
-        "cdk-iam-floyd": "^0.603.0",
+        "cdk-iam-floyd": "^0.654.0",
         "constructs": "^10.3.0",
         "js-yaml": "^4.1.0",
         "react-scripts": "^5.0.1"
@@ -48,6 +48,5 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
-    },
-    "packageManager": "yarn@3.2.0"
+    }
 }
