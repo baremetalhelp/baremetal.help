@@ -6,18 +6,21 @@ import {
     RecordTarget,
 } from "aws-cdk-lib/aws-route53";
 import { Construct } from "constructs";
-import { BareMetalConfig } from "../model";
 
-export interface BareMetalGitHubPagesStackProps extends StackProps {
-    commonConfig: BareMetalConfig;
-}
-
+// Well-know IP addresses git GitHub Pages
+//
 const GITHUB_PAGES_IP_ADDRESSES = [
     "185.199.108.153",
     "185.199.109.153",
     "185.199.110.153",
     "185.199.111.153",
 ];
+
+export interface BareMetalGitHubPagesStackProps extends StackProps {
+    domainName: string;
+    subDomainName?: string;
+    gitHubUser: string;
+}
 
 export class BareMetalGitHubPagesStack extends Stack {
     constructor(
@@ -27,7 +30,11 @@ export class BareMetalGitHubPagesStack extends Stack {
     ) {
         super(scope, id, props);
 
-        const { domainName, gitHubUser } = props.commonConfig;
+        const { domainName, subDomainName, gitHubUser } = props;
+
+        const recordName = subDomainName
+            ? `${subDomainName}.${domainName}`
+            : domainName;
 
         if (!domainName || !gitHubUser) {
             throw Error(
@@ -35,18 +42,18 @@ export class BareMetalGitHubPagesStack extends Stack {
             );
         }
 
-        const hostedZone = HostedZone.fromLookup(this, "hostedzone", {
+        const zone = HostedZone.fromLookup(this, "hostedzone", {
             domainName,
         });
 
         const alias = new ARecord(this, "alias", {
-            zone: hostedZone,
-            recordName: "baremetal.help",
+            zone,
+            recordName,
             target: RecordTarget.fromIpAddresses(...GITHUB_PAGES_IP_ADDRESSES),
         });
 
         const cname = new CnameRecord(this, "cname", {
-            zone: hostedZone,
+            zone,
             domainName: `${gitHubUser}.github.io`,
             recordName: "www",
         });

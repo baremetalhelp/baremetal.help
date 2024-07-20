@@ -17,29 +17,26 @@ import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
 import { Statement } from "cdk-iam-floyd";
 import { Construct } from "constructs";
 
-export interface BareMetalCdnStackProps extends StackProps {
+export interface BareMetalWebsiteStackProps extends StackProps {
     domainName: string;
     subDomainName: string;
 }
 
-export class BareMetalCdnStack extends Stack {
+export class BareMetalWebsiteStack extends Stack {
     readonly siteBucketName: string;
     readonly distributionId: string;
 
-    constructor(scope: Construct, name: string, props: BareMetalCdnStackProps) {
+    constructor(
+        scope: Construct,
+        name: string,
+        props: BareMetalWebsiteStackProps
+    ) {
         super(scope, name);
 
         const { domainName, subDomainName } = props;
-
-        // TODO: HZ lookup failing from domain name
-        //
-        const zone = HostedZone.fromHostedZoneAttributes(this, "hosted-zone", {
-            hostedZoneId: "Z02074912A2SG31RKK387",
-            zoneName: domainName,
+        const zone = HostedZone.fromLookup(this, "hosted-zone", {
+            domainName: props.domainName,
         });
-        // const zone = HostedZone.fromLookup(this, "hosted-zone", {
-        //     domainName
-        // });
         const siteDomain = subDomainName + "." + domainName;
         const cloudfrontOAI = new OriginAccessIdentity(this, "cloudfront-oai");
         const siteBucket = new Bucket(this, "site-bucket", {
@@ -56,13 +53,13 @@ export class BareMetalCdnStack extends Stack {
                 )
         );
 
-        const certificate = new Certificate(this, "certificate", {
+        const certificate = new Certificate(this, "SiteCertificate", {
             domainName: siteDomain,
             validation: CertificateValidation.fromDns(zone),
         });
 
-        const distribution = new Distribution(this, "distribution", {
-            certificate,
+        const distribution = new Distribution(this, "SiteDistribution", {
+            certificate: certificate,
             defaultRootObject: "index.html",
             domainNames: [siteDomain],
             minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
@@ -84,29 +81,29 @@ export class BareMetalCdnStack extends Stack {
             },
         });
 
-        new ARecord(this, "alias", {
+        new ARecord(this, "SiteAliasRecord", {
             recordName: siteDomain,
             target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
             zone,
         });
 
-        // // Do this in GitHub actions
-        // //
-        // // const siteBucket = Bucket.fromBucketName(this, "site-bucket", this.siteBucketName)
-        // // const distribution = Distribution.fromDistributionAttributes(this, "distribution", {
-        // //     distributionId: this.distributionId,
-        // //     domainName: siteDomain,
-        // // })
-        // // new BucketDeployment(this, "deployment", {
-        // //     sources: [
-        // //         Source.asset(path.join(__dirname, "./site-contents")),
-        // //     ],
-        // //     destinationBucket: siteBucket,
-        // //     distribution,
-        // //     distributionPaths: ["/*"],
-        // // });
-
         this.siteBucketName = siteBucket.bucketName;
         this.distributionId = distribution.distributionId;
+
+        // Do this in GitHub actions
+        //
+        // const siteBucket = Bucket.fromBucketName(this, "site-bucket", this.siteBucketName)
+        // const distribution = Distribution.fromDistributionAttributes(this, "distribution", {
+        //     distributionId: this.distributionId,
+        //     domainName: siteDomain,
+        // })
+        // new BucketDeployment(this, "deployment", {
+        //     sources: [
+        //         Source.asset(path.join(__dirname, "./site-contents")),
+        //     ],
+        //     destinationBucket: siteBucket,
+        //     distribution,
+        //     distributionPaths: ["/*"],
+        // });
     }
 }

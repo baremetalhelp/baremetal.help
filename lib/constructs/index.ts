@@ -1,1 +1,1 @@
-export * from './baremetal-cdn'
+export * from './baremetal-certificate'

@@ -38,26 +38,25 @@ const FeatureList: FeatureItem[] = [
         description: (
             <>
                 While we link to existing documentation whenever we can,
-                sometimes it's wrong or out of date. Sometimes too our
-                documentation could use some help. There are pictures if it's
-                easier to explain and validate that way.
+                sometimes it's wrong or out of date. We have lots of
+                step-by-step pictures if it's easier to explain and validate
+                that way.
             </>
         ),
     },
 ];
 
-function Feature({ title, Svg, image, description }: FeatureItem) {
+function Feature({ title, image, description }: FeatureItem) {
     return (
         <div className={clsx("col col--4")}>
             <div className="text--center padding-horiz--md">
                 <h3>{title}</h3>
             </div>
-            <div className="text--center">
-                <img src={image} />
-                {/* <Svg className={styles.featureSvg} role="img" /> */}
-            </div>
             <div className="text--center padding-horiz--md">
                 <p>{description}</p>
+            </div>
+            <div className="text--center">
+                <img src={image} />
             </div>
         </div>
     );

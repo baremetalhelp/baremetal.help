@@ -56,21 +56,8 @@ Clearer? Just remember that AD, AWS SSO, and AWS IAM each have their own definit
 See the general assumptions in "About BareMetal tutorials".
 
 In addition
-1. You have an Azure account [link]
-2. ...
+1. You have an [Azure account](https://azure.microsoft.com)
 
-## Required Configuration
+## Quick Start
 
-1. Blah
-
-## Deploy 
-
-Blah.
-
-## Resources
-
-Blah.
-
-## Verification
-
-Blah.
+Just kidding. There is no quick start. This is going to take a while and there are lots of manual steps.

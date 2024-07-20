@@ -1,5 +1,5 @@
 import { ManagedPolicies } from "cdk-constants";
-import { S3 } from "cdk-iam-floyd";
+import { Statement } from "cdk-iam-floyd";
 import { PermissionSetConfig } from "../lib/model";
 
 export enum Account {
@@ -51,7 +51,7 @@ export const landingZoneConfig: GroupAssignment[] = [
             name: "VIEW_ONLY",
             awsManagedPolicyNames: [ManagedPolicies.VIEW_ONLY_ACCESS],
             inlinePolicyStatements: [
-                new S3().deny().toGetObject().onObject("*", "*"),
+                new Statement.S3().deny().toGetObject().onObject("*", "*"),
             ],
         },
     },

@@ -11,10 +11,10 @@ These are the SSO integration instructions you're looking for.
 See the general assumptions in "About BareMetal tutorials". [link]
 
 In addition
-1. You have an Azure account [link]
-2. An Azure AD tenant in that account and permissions to configure it [link]
-3. A trial P2 tier license [link + terminology]
-4. ...
+1. You have an [Azure account](https://azure.microsoft.com)
+2. An [Azure AD tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant) in that account and permissions to configure it.
+3. An Azure P2 trial license [link]
+
 ## Enable AWS SSO
 
 In the AWS Console, find the Single Sign-On page.
@@ -27,11 +27,13 @@ Click "Enable AWS SSO".
 
 ### AWS SSO enabled OK
 
+It may take a minute or two, but success looks like this.
+
 ![AWS SSO enabled](images/aws-sso-created.png)
 
 ## Create Initial AD Tenant 
 
-> [link] for instructions
+Follow [these instructions](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant).
 
 ![](images/empty-ad-console.png)
 
@@ -40,6 +42,8 @@ Click "Enterprise applications"
 :::
 
 ## Create New Enterprise Application
+
+An Enterprise Application is the feature you add to integrate with AWS SSO. You can't do any of the rest of this tutorial without this feature.
 
 ![](images/ad-new-application.png)
 
@@ -50,6 +54,8 @@ Click "+ New application"
 :::info action
 Search for "aws"
 :::
+
+You'll see AWS show up twice. There's a legacy application and then the one that works. Pick the one that works.
 
 ![](images/search-aws-application.png)
 

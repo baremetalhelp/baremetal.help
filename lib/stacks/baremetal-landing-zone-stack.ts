@@ -7,11 +7,53 @@ import {
 } from "aws-cdk-lib/aws-sso";
 import { Construct } from "constructs";
 import { landingZoneConfig } from "../../config/landing-zone-config";
-import { BareMetalConfig, PermissionSetConfig } from "../model";
+import { PermissionSetConfig } from "../model";
 
 export interface BareMetalLandingZoneStackProps extends StackProps {
-    commonConfig: BareMetalConfig;
+    ssoInstanceArn: string;
 }
+
+export class BareMetalLandingZoneStack extends Stack {
+    constructor(
+        scope: Construct,
+        id: string,
+        props: BareMetalLandingZoneStackProps
+    ) {
+        super(scope, id, props);
+
+        const { ssoInstanceArn } = props;
+
+        if (!ssoInstanceArn) {
+            throw Error(
+                "Permission Set can only be created if there's an SSO ARN in the configuration"
+            );
+        }
+
+        landingZoneConfig.forEach((assignment) => {
+            const permissionSet = permissionSetFromConfig(
+                this,
+                ssoInstanceArn,
+                assignment.permissionSetConfig
+            );
+
+            assignment.accounts.forEach((account) => {
+                new CfnAssignment(
+                    this,
+                    `assignment_${account}_${assignment.group}`,
+                    {
+                        instanceArn: ssoInstanceArn,
+                        permissionSetArn: permissionSet.attrPermissionSetArn,
+                        targetType: "AWS_ACCOUNT",
+                        targetId: account,
+                        principalType: "GROUP",
+                        principalId: assignment.group,
+                    }
+                );
+            });
+        });
+    }
+}
+
 
 function permissionSetFromConfig(
     scope: Construct,
@@ -64,43 +106,3 @@ function permissionSetFromConfig(
     );
 }
 
-export class BareMetalLandingZoneStack extends Stack {
-    constructor(
-        scope: Construct,
-        id: string,
-        props: BareMetalLandingZoneStackProps
-    ) {
-        super(scope, id, props);
-
-        const { ssoInstanceArn } = props.commonConfig;
-
-        if (!ssoInstanceArn) {
-            throw Error(
-                "Permission Set can only be created if there's an SSO ARN in the configuration"
-            );
-        }
-
-        landingZoneConfig.forEach((assignment) => {
-            const permissionSet = permissionSetFromConfig(
-                this,
-                ssoInstanceArn,
-                assignment.permissionSetConfig
-            );
-
-            assignment.accounts.forEach((account) => {
-                new CfnAssignment(
-                    this,
-                    `assignment_${account}_${assignment.group}`,
-                    {
-                        instanceArn: ssoInstanceArn,
-                        permissionSetArn: permissionSet.attrPermissionSetArn,
-                        targetType: "AWS_ACCOUNT",
-                        targetId: account,
-                        principalType: "GROUP",
-                        principalId: assignment.group,
-                    }
-                );
-            });
-        });
-    }
-}
