@@ -1,0 +1,8 @@
+{
+    "label": "Start Here",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "Get these basic BareMetal tutorials under your belt as soon as you can. They're not only good examples of the BareMetal way of doing things, but they're pretty handy in ant case."
+    }
+}

@@ -21,7 +21,7 @@ function HomepageHeader() {
                             className="button button--secondary button--lg"
                             to="/docs/intro"
                         >
-                            Get Started
+                            👉 Get Started with BareMetal tutorials! 👈
                         </Link>
                     </div>
                 </div>
