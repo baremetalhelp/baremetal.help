@@ -37,7 +37,7 @@ Follow the docusaurus instructions for the project structure,
 
 `yarn` (no args needed) to install dependencies.
 
-`yarn start` to pull up a local version at <http://localhost:3000/>.
+`yarn start` to pull up a local version at (http://localhost:3000/](http://localhost:3000/).
 
 ```mdx-code-block
 <BrowserWindow>

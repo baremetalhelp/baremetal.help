@@ -184,6 +184,7 @@ export const globalTags: { [key: string]: any } = {
 - [ ] Create reusable CDK Constructs for common components and publish them separately. Check again whether that's already been done and leverage those if they're any good.
 - [ ] And when you do that, make them take, for example, either an existing bucket or a bucket configuration for a new one. Better still in that case, pass an existing origin like `S3Origin` instead of the bucket. Otherwise the default will be a bucket configured as origin. I like that better.
 - [ ] Set up billing alarms from day 1.
+- [ ] Talk about https://aws.amazon.com/blogs/opensource/accelerate-aws-single-sign-on-sso-implementation-using-aws-cloud-development-kit-aws-cdk/
 
 :::note
 BareMetal is not really a trademark. But "BareMetal is not really a trademark™" is.

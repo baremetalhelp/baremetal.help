@@ -10,7 +10,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: "BareMetal™ Help",
-    tagline: "Enterprise-grade cloud infrastructure from bare metal",
+    tagline: "Enterprise-grade cloud infrastructure from nothing ... that's bare metal",
     url: "https://baremetal.help",
     baseUrl: "/",
     onBrokenLinks: "throw",
@@ -24,7 +24,7 @@ const config = {
         [
             "classic",
             /** @type {import('@docusaurus/preset-classic').Options} */
-            ({
+            {
                 docs: {
                     sidebarPath: require.resolve("./sidebars.js"),
                     remarkPlugins: [require("mdx-mermaid")],
@@ -34,13 +34,13 @@ const config = {
                 theme: {
                     customCss: require.resolve("./src/css/custom.css"),
                 },
-            }),
+            },
         ],
     ],
 
     themeConfig:
         /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-        ({
+        {
             navbar: {
                 title: "BareMetal Help",
                 logo: {
@@ -93,7 +93,7 @@ const config = {
                 theme: lightCodeTheme,
                 darkTheme: darkCodeTheme,
             },
-        }),
+        },
 };
 
 module.exports = config;

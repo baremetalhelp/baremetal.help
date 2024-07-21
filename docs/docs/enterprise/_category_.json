@@ -1,0 +1,8 @@
+{
+    "label": "Enterprise Foundation",
+    "position": 3,
+    "link": {
+        "type": "generated-index",
+        "description": "Beyond the basics, these BareMetal tutorials show you exactly how to create rock-solid Enterprise infrastructure in AWS."
+    }
+}
