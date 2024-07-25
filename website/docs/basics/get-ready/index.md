@@ -18,15 +18,15 @@ While you may not need to know everything about the tools like TypeScript and th
 
 ## Install the Tools
 
-You have a couple of good options. You can use a package manager or install by hand. We recommend a package manager and the one we use is homebrew.
+You have a couple of good options. You can use a package manager or install by hand. We recommend a package manager and the one we use is  [`homebrew`](https://brew.sh/).
 
-### Using homebrew
+### Using `homebrew`
 
 :::note TODO
 This won't work on Windows, only macOS and Linux. You'll need to follow the "Otherwise..." instructions on Windows.
 :::
 
-Things will be easier if you use a package manager, especially [homebrew](https://brew.sh/). You can use it to install the tools you'll need. In any case, we link to each tool's installation instructions at the official docs. You can install the tools however you like, but you might want to go with the "brew" version because it's easy to do and easy to stay up to date.
+Things will be easier if you use a package manager, especially [`homebrew`](https://brew.sh/). You can use it to install the tools you'll need. In any case, we link to each tool's installation instructions at the official docs. You can install the tools however you like, but you might want to go with the `homebrew` version because it's easy to do and easy to stay up to date.
 
 ```bash
 brew install git node yarn typescript awscli cdk-cli
@@ -34,13 +34,13 @@ brew install git node yarn typescript awscli cdk-cli
 
 ### Otherwise...
 
-Install [Git](https://github.com/git-guides/install-git). You'll need this to access and download the BareMetal source code that's at the foundation of repeatable implementations of the architectures.
+Install [`git`](https://github.com/git-guides/install-git). You'll need this to access and download the BareMetal source code that's at the foundation of repeatable implementations of the architectures.
 
-Install a good version of [node](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs). This is one of the tools that is likely to be installed already but may not be up to date.
+Install a current version of [`node`](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs). This is one of the tools that is likely to be installed already but may not be up to date.
 
-Install [yarn](https://yarnpkg.com/) the package manager for JavaScript and TypeScript. The code for each BareMetal tutorial requires you to _run_ but not necessarily _understand_ what's going on. And running the code will download all the required dependencies for the infrastructure-as-code.
+Install [`yarn`](https://yarnpkg.com/) the package manager for JavaScript and TypeScript. The code for each BareMetal tutorial requires you to _run_ but not necessarily _understand_ what's going on. And running the code will download all the required dependencies for the infrastructure-as-code.
 
-Now for [TypeScript](https://www.typescriptlang.org/download/). This is the language the BareMetal scripts are written in.
+Now [TypeScript](https://www.typescriptlang.org/download/). This is the language the BareMetal scripts are written in because that's the source language the infrastructure-as-code is written in.
 
 Install the latest version of the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
@@ -80,7 +80,7 @@ Now try creating one
 aws s3 mb s3://thenameofyourbucket
 ```
 
-Names of S3 buckets are globally unique. And you can't have the bucket called `thenameofyourbucket` because I got there first 🤣. Just try something long and random.
+Names of S3 buckets are globally unique. And you can't have the bucket called `thenameofyourbucket` because I got there first 🤣. Just try something long and random, like a [UUID](https://www.uuidtools.com/v4).
 
 Now list your S3 buckets again and you'll see it.
 
