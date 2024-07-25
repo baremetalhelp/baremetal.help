@@ -6,8 +6,6 @@ on:
             - "**.md"
         branches:
             - main
-            - develop
-    # Allow manually triggering the workflow.
     workflow_dispatch:
 
 defaults:
@@ -21,48 +19,13 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    checks:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: "19.x"
-            - name: Test Build
-              run: |
-                  if [ -e yarn.lock ]; then
-                    yarn install --frozen-lockfile
-                  elif [ -e package-lock.json ]; then
-                    npm ci
-                  else
-                    npm i
-                  fi
-                    yarn run build
-
-    gh-release:
-        name: Release docs
-        if: ${{ github.ref == 'refs/heads/main' }}
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: "19.x"
-            # - uses: webfactory/ssh-agent@v0.5.0
-            #   with:
-            #       ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
-            - name: Release to GitHub Pages
-              env:
-                  USE_SSH: true
-                  GIT_USER: git
-              run: |
-                  git config --global user.email "actions@github.com"
-                  git config --global user.name "gh-actions"
-                  if [ -e yarn.lock ]; then
-                    yarn install --frozen-lockfile
-                  elif [ -e package-lock.json ]; then
-                    npm ci
-                  else
-                    npm i
-                  fi
-                  DEPLOYMENT_BRANCH=gh-pages yarn run deploy
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: redkubes/docusaurus-deploy-action@v1
+        with:
+          source-folder: website
+          git-user: baremetalhelp
+          git-password: ${{ secrets.GITHUB_TOKEN }}
+          deployment-branch: gh-pages
