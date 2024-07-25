@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs_new=self.webpackChunkdocs_new||[]).push([[8121],{5689:e=>{e.exports=JSON.parse('{"tags":[{"label":"General","permalink":"/blog/tags/general","description":"Geneal information about BareMetal Help","count":1}]}')}}]);
