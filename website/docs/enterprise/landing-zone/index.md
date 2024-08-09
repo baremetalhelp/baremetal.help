@@ -7,6 +7,7 @@ sidebar_position: 3
 :::warning This page has multiple issues.
 
 - [ ] The preamble is too wordy and not very good.
+- [ ] Get the configuration and constants correct and in the correct location
 - [ ] It does not describe the what the landing zone is and how to make it very well.
 - [ ] There's no help for resolving common issues.
 :::

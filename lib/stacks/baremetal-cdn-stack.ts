@@ -1,4 +1,4 @@
-import { Duration, Stack, StackProps } from "aws-cdk-lib";
+import { CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib";
 import {
     Certificate,
     CertificateValidation,
@@ -15,6 +15,7 @@ import { ARecord, HostedZone, RecordTarget } from "aws-cdk-lib/aws-route53";
 import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
 import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
 import { Statement } from "cdk-iam-floyd";
+import { AwsManagedPolicy } from "cdk-iam-floyd/lib/generated/aws-managed-policies/iam-floyd";
 import { Construct } from "constructs";
 
 export interface BareMetalCdnStackProps extends StackProps {
@@ -24,22 +25,22 @@ export interface BareMetalCdnStackProps extends StackProps {
 
 export class BareMetalCdnStack extends Stack {
     readonly siteBucketName: string;
-    readonly distributionId: string;
+    readonly siteDomain: string;
 
     constructor(scope: Construct, name: string, props: BareMetalCdnStackProps) {
         super(scope, name);
 
         const { domainName, subDomainName } = props;
 
-        // TODO: HZ lookup failing from domain name
+        // TODO: HostedZone lookup failing from domain name for some reason
         //
+        // const zone = HostedZone.fromLookup(this, "hosted-zone", {
+        //     domainName,
+        // });
         const zone = HostedZone.fromHostedZoneAttributes(this, "hosted-zone", {
             hostedZoneId: "Z02074912A2SG31RKK387",
             zoneName: domainName,
         });
-        // const zone = HostedZone.fromLookup(this, "hosted-zone", {
-        //     domainName
-        // });
         const siteDomain = subDomainName + "." + domainName;
         const cloudfrontOAI = new OriginAccessIdentity(this, "cloudfront-oai");
         const siteBucket = new Bucket(this, "site-bucket", {
@@ -90,23 +91,17 @@ export class BareMetalCdnStack extends Stack {
             zone,
         });
 
-        // // Do this in GitHub actions
-        // //
-        // // const siteBucket = Bucket.fromBucketName(this, "site-bucket", this.siteBucketName)
-        // // const distribution = Distribution.fromDistributionAttributes(this, "distribution", {
-        // //     distributionId: this.distributionId,
-        // //     domainName: siteDomain,
-        // // })
-        // // new BucketDeployment(this, "deployment", {
-        // //     sources: [
-        // //         Source.asset(path.join(__dirname, "./site-contents")),
-        // //     ],
-        // //     destinationBucket: siteBucket,
-        // //     distribution,
-        // //     distributionPaths: ["/*"],
-        // // });
+        new CfnOutput(this, "bucket-name-export", {
+            exportName: "bucket-name",
+            value: siteBucket.bucketName,
+        });
+
+        new CfnOutput(this, "site-domain-export", {
+            exportName: "site-domain",
+            value: siteDomain,
+        });
 
         this.siteBucketName = siteBucket.bucketName;
-        this.distributionId = distribution.distributionId;
+        this.siteDomain = siteDomain;
     }
 }

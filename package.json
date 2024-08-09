@@ -14,7 +14,7 @@
     },
     "devDependencies": {
         "@types/jest": "^29.5.12",
-        "@types/node": "^20.11.19",
+        "@types/node": "^22.0.0",
         "@types/uuid": "^10.0.0",
         "@typescript-eslint/eslint-plugin": "^7.0.1",
         "@typescript-eslint/parser": "^7.0.1",
@@ -23,7 +23,7 @@
         "eslint-config-standard": "^17.1.0",
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^6.1.1",
+        "eslint-plugin-promise": "^7.0.0",
         "eslint-plugin-react": "^7.33.2",
         "jest": "^29.7.0",
         "ts-jest": "^29.1.2",
@@ -31,10 +31,12 @@
         "typescript": "^5.3.3"
     },
     "dependencies": {
+        "@aws-sdk/types": "^3.609.0",
         "@types/js-yaml": "^4.0.9",
         "aws-cdk-lib": "^2.2.202",
+        "aws-sdk": "^2.1665.0",
         "cdk-constants": "^3.0.3",
-        "cdk-iam-floyd": "^0.654.0",
+        "cdk-iam-floyd": "^0.655.0",
         "constructs": "^10.3.0",
         "js-yaml": "^4.1.0",
         "react-scripts": "^5.0.1"

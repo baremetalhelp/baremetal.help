@@ -28,6 +28,7 @@ export default function BareMetalFeatures(): JSX.Element {
                             sure everything's explained.
                         </p>
                         <p> So there is no guesswork.</p>
+                        <p>If you're stuck at any point for any reason, please email support@baremetal.help</p>
                     </div>
                 </div>
                 <hr />
@@ -37,11 +38,11 @@ export default function BareMetalFeatures(): JSX.Element {
                     </div>
                     <div className="col col--4">
                         <p>
-                            Wherever possible, we include Infrastructure-as-Code
+                            Wherever possible, we include infrastructure-as-code
                             for all the things.
                         </p>
                         <p>
-                            Infrastructure-as-Code guarantees repeatable
+                            Infrastructure-as-code guarantees repeatable
                             deployments for BareMetal architectures. We start
                             with a secure-by-default baseline and show you how
                             to extend the code to suit your needs.
@@ -71,7 +72,7 @@ export default function BareMetalFeatures(): JSX.Element {
                             So while we use and gladly refer to what's already
                             written, BareMetal is your definitive guide for how
                             to put everything together. We give you the exact
-                            instructions with carefully chosen illustrations and
+                            instructions with carefully-chosen illustrations and
                             simple-to-follow text.
                         </p>
                     </div>

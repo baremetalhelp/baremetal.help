@@ -1,23 +1,18 @@
 # Content Delivery Network, CDN
 
-:::warning This page has multiple issues
-- [ ] We do not show how to find the S3 bucket in the stack
-- [ ] We do not show common failures and how to fix them
-:::
+We're going to build a Content Delivery Network, CDN, from scratch. A CDN serves web objects like images from locations that are geographically close to consumers. That means improved latency for users and less load on your resources because the CDN serves objects on your behalf. It's a very common pattern.
 
-We're going to build a Content Delivery Network, CDN, from scratch. A CDN serves web objects like images from locations that are geographically close to consumers. That means better latency for users and less load on your resources because the CDN serves objects on your behalf. It's a very common pattern.
+A CDN is at its core a read-through cache. You configure where your images and so on reside — the _origin_ — and the CDN takes care of copying them to edge locations. Edge locations are data centers that are distributed across the world, and your requests are directed to one close you whenever you want to load assets like images in a web page. Latency and bandwidth are probably better if you load it from somewhere close.
 
-A CDN is at its core a read-through cache. You configure where your images and so on reside — the _origin_ — and the CDN takes care of copying them to edge locations. Edge locations are data centers that are distributed across the world so there's one close you if you're looking at a web page and want to load an image. The response and bandwidth is probably better if you load it from somewhere close.
+If the requested image is not yet available on a given edge location, it will be fetched from your origin. Origin is an S3 Bucket in the one we're going to build, but could also be an API. If an asset is requested that does not exists at the origin, the CDN will return an HTTP 404, Not Found and cache the response. Again, to reduce the burden on your origin.
 
-If the requested image is not yet available on a given edge location, it will be fetched from your origin. Origin is an S3 Bucket in the one we're going to build, but could also be an API.
-
-You can do clever things like adding compute to scale images, for example, in Amazon Cloudfront, but we're going to keep things simple here.
+You can do clever things like [adding compute to scale images](https://aws.amazon.com/blogs/networking-and-content-delivery/resizing-images-with-amazon-cloudfront-lambdaedge-aws-cdn-blog/), for example, in Amazon Cloudfront, but we're going to keep things simple here.
 
 ## Quick Start
 
 If you've done this kind of thing before.
 
-Edit `baremetal.help.ts` in the repo root and set `domainName` to your domain.
+Edit `bin/baremetal.help.ts` in the repo root and set `domainName` to your domain. We're using `baremetal.help` because that's our domain. You can't have that domain unless you offer us enough money. I mean, everything has a price. So use your own or [get one](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html).
 
 ```ts
 const domainName = "baremetal.help";
@@ -50,7 +45,7 @@ In addition
 1. You registered a domain. This is not going to work without it. There are more places to register domains than you can count. Here's [how to do that on AWS](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html). Things will go much more smoothly if you use AWS as your registrar, because the CDN stack as-is will add the relevant DNS records automatically in AWS. And you need to do that to prove you own the domain you're creating the SSL certificate for. In addition, the SSL certificate requires domain validation — that you actually own the domain — which can be automated if you use AWS as your Domain Registrar. 
 2. You have content — like images and CSS — you want to serve to web applications or mobile apps. Or just some test images for now.
 
-:::note
+:::note best-practice
 You can serve content from the internal HTTPS endpoint Cloudfront provides without linking a domain you own, but the URL of that endpoint will change if you delete and recreate the CDN.
 
 If you write applications that rely on the Cloudfront internal URL, you'll have a lot to update when you get a new one.

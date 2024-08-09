@@ -4,14 +4,11 @@
 const lightCodeTheme = require("prism-react-renderer/themes/vsLight");
 const darkCodeTheme = require("prism-react-renderer/themes/vsDark");
 
-// const lightCodeTheme = require("prism-react-renderer/themes/github");
-// const darkCodeTheme = require("prism-react-renderer/themes/dracula");
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: "BareMetal Help™",
     tagline:
-        "Enterprise-grade cloud infrastructure from nothing ... that's bare metal",
+        "Enterprise-grade cloud infrastructure from nothing ... that's bare metal!",
     url: "https://baremetal.help",
     baseUrl: "/",
     markdown: {
@@ -21,8 +18,8 @@ const config = {
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
-    organizationName: "baremetalhelp", // Usually your GitHub org/user name.
-    projectName: "baremetal.help", // Usually your repo name.
+    organizationName: "baremetalhelp", 
+    projectName: "baremetal.help", 
     trailingSlash: false,
 
     presets: [
@@ -92,12 +89,16 @@ const config = {
                     items: [
                         {
                             label: "GitHub",
-                            href: "https://github.com/baremetalhelp/baremetal.help",
+                            href: "https://github.com/baremetalhelp/",
+                        },
+                        {
+                            label: "LinkedIn",
+                            href: "https://www.linkedin.com/in/stephenharrison/",
                         },
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, support@baremetal.help`,
+            copyright: `Copyright © ${new Date().getFullYear()} BareMetal Help. Built with Docusaurus. Made with ❤️ by Stephen Harrison, BareMetal Help, support@baremetal.help`,
         },
         prism: {
             theme: lightCodeTheme,

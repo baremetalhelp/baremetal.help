@@ -19,11 +19,11 @@ And managed ways of doing things became the dominant direction. As cloud provide
 
 There is no reason to pick AWS over the other dominant public cloud providers except preference. As we spoke about managed services above, we find that AWS leads the charge, which allows us to focus on the "what" of applications rather than the "how." Most public providers provide the same basic functionality with a different focus.
 
-Microsoft's Azure public cloud, for example, has very good support for SQLServer. Oracle public cloud has great support for the Oracle database as you'd expect. AWS does not sell licenses for its own databases. Instead it provides a range of database offerings, including very high performance and scalable implementations of open source database engines like PostgreSQL and MySQl. You can also bring your own Oracle licenses if you want to migrate your existing databases to AWS. There are more options on AWS, but databases work in any public cloud.
+Microsoft's Azure public cloud, for example, has very good support for SQLServer. Oracle public cloud has great support for the Oracle database as you'd expect. AWS does not sell licenses for its own databases. Instead it provides a range of database offerings, including very high performance and scalable implementations of open source database engines like PostgreSQL and MySQL. You can also bring your own Oracle licenses if you want to migrate your existing databases to AWS. There are more options on AWS, but databases work in any public cloud.
 
 ## But Something's Missing
 
-All cloud providers have excellent documentation on individual managed services and best-practice architectures that combine them. You can also go to Stackoverflow, for example, for specifics, which is often helpful but often out of date. Of course, lots of people write on these topics. Some of it's great and was the inspiration for some of the BareMetal material.
+All cloud providers have excellent documentation about individual managed services and best-practice architectures that combine them. You can also go to Stackoverflow, for example, for specifics, which is often helpful but often out of date. Of course, lots of people write on these topics. Some of it's great and was the inspiration for some of the BareMetal material.
 
 There are gaps.
 

@@ -11,27 +11,34 @@ import {
     BareMetalDnsStack,
     BareMetalEcsStack,
     BareMetalGitHubPagesStack,
-    BareMetalVpcStack
+    BareMetalLandingZoneStack,
+    BareMetalVpcStack,
 } from "../lib/stacks";
 
+// Fetch the account and region from the shell environment
+//
 const env: Environment = {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
 };
 
-const enterpriseName = "baremetal";
-const tld = "help";
-const organizationId = "o-d987217uy4";
-const domainName = `${enterpriseName}.${tld}`;
-const vpcName = `${enterpriseName}-vpc`;
+// Some constants you'll change for your enterprise
+//
+const enterpriseName = "baremetal"; // CHANGE ME
+const domainName = "baremetal.help"; // CHANGE ME
+
+const vpcName = `${domainName}-vpc`;
 
 const app = new App();
 
 /**
- * Here are all the independent stacks you can deploy on your infrastructure.
+ * Here are all the stacks you can deploy on your infrastructure.
  *
- * Say `cdk deploy BareMetalCdn` and so on to deploy just one. You almost certainly don't want to deploy
+ * Say `cdk deploy BareMetalCdn`, for example, to deploy the CDN stack. You almost certainly don't want to deploy
  * them all at once because you probably don't need them all.
+ *
+ * Some of these stack rely on others, like the VPC. We take care of those dependencies for you. For example, if you deploy
+ * the AWS Batch stack, we deploy the VPC stack first. You can also deploy the dependent stacks by hand if you like. It won't break anything.
  */
 new BareMetalCdnStack(app, "BareMetalCdn", {
     env,
@@ -39,13 +46,6 @@ new BareMetalCdnStack(app, "BareMetalCdn", {
     domainName,
     subDomainName: "cdn",
 });
-
-// new BareMetalWebsiteStack(app, "BareMetalWebsite", {
-//     env,
-//     tags,
-//     domainName,
-//     subDomainName: "www",
-// });
 
 new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", {
     env,
@@ -55,17 +55,17 @@ new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", {
     gitHubUser: "baremetalhelp",
 });
 
-// new BareMetalLandingZoneStack(app, "BareMetalLandingZone", {
-//     env,
-//     tags,
-//     ssoInstanceArn: "arn:aws:sso:::instance/ssoins-722348d4ba8b2b4e",
-// });
+new BareMetalLandingZoneStack(app, "BareMetalLandingZone", {
+    env,
+    tags,
+    ssoInstanceArn: "unknown",
+});
 
 new BareMetalCodeArtifactStack(app, "BareMetalCodeArtifact", {
     env,
     tags,
     domainName: enterpriseName,
-    organizationId,
+    organizationId: "unknown",
 });
 
 new BareMetalDnsStack(app, "BareMetalDns", {
@@ -98,7 +98,6 @@ const batchStack = new BareMetalBatchStack(app, "BareMetalBatch", {
     vpc,
 });
 batchStack.addDependency(vpcStack);
-
 
 // TODO
 // export useful properties

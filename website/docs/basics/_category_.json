@@ -1,8 +1,8 @@
 {
-    "label": "Start Here",
-    "position": 2,
+    "label": "Foundation Infrastructure",
+    "position": 3,
     "link": {
         "type": "generated-index",
-        "description": "Make sure you follow 'Get Ready!' even if you think you are. Then put that into practice by building a production-grade enterprise Content Delivery Network, CDN"
+        "description": "Make sure you follow 'Development Environment' even if you think you are. Then put that into practice by building a production-grade enterprise Content Delivery Network, CDN"
     }
 }

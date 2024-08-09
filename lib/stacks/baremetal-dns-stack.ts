@@ -10,6 +10,12 @@ export interface BareMetalDnsStackProps extends StackProps {
     create?: boolean;
 }
 
+/**
+ * An example of a data-driven stack. This one creates simple TXT records in a Route53 Hosted Zone.
+ * 
+ * We either create or look up a hosted zone from the domain. The default is to look up the domain 
+ * because it's unlikely you don't already have one.
+ */
 export class BareMetalDnsStack extends Stack {
     readonly s3Bucket: Bucket;
     readonly certificate: Certificate;
@@ -32,8 +38,8 @@ export class BareMetalDnsStack extends Stack {
         for (const key in dnsTxtRecords) {
             new TxtRecord(this, key, {
                 zone,
-                values: [dnsTxtRecords[key]],
                 recordName: key,
+                values: [dnsTxtRecords[key]],
             });
         }
     }
