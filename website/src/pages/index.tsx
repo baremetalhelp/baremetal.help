@@ -30,14 +30,14 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
     const { siteConfig } = useDocusaurusContext();
-    
+
     return (
         <Layout
             title={siteConfig.title}
             description="How to create enterprise-grade foundations in the public cloud"
         >
             <HomepageHeader />
-            
+
             <main>
                 <HomepageFeatures />
                 {/* <HomepageHighlights /> */}

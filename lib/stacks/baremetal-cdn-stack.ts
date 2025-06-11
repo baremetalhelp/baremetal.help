@@ -53,8 +53,8 @@ export class BareMetalCdnStack extends Stack {
                 .toGetObject()
                 .on(siteBucket.arnForObjects("*"))
                 .forCanonicalUser(
-                    cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId
-                )
+                    cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId,
+                ),
         );
 
         const certificate = new Certificate(this, "certificate", {

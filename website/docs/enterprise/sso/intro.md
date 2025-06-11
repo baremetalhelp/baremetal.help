@@ -8,7 +8,7 @@ We're going to configure AWS Single Sign-On to talk to Azure AD. You'll need a d
 
 ## Architecture
 
-You'll use the Azure AD console to administer your users and groups. And AD will be where you manage users and groups. In fact, it's the only place because AWS SSO has a single _Identity Provider_ [link], which disables managing user and groups from the AWS Console. 
+You'll use the Azure AD console to administer your users and groups. And AD will be where you manage users and groups. In fact, it's the only place because AWS SSO has a single _Identity Provider_ [link], which disables managing user and groups from the AWS Console.
 
 ```mermaid
 stateDiagram-v2
@@ -19,7 +19,7 @@ stateDiagram-v2
     state "SSO Users" as sso_users
     state "AWS Single Sign-On" as sso
     state "AWS Landing Zone" as lz
-    
+
     azure_ad --> ad_groups : manages
     azure_ad --> ad_users : manages
     ad_groups --> sso_groups : synchronizes
@@ -57,6 +57,7 @@ Clearer? Just remember that AD, AWS SSO, and AWS IAM each have their own definit
 See the general assumptions in "About BareMetal tutorials".
 
 In addition
+
 1. You have an [Azure account](https://azure.microsoft.com)
 
 ## Quick Start

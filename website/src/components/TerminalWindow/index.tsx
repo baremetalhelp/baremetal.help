@@ -33,7 +33,9 @@ export default function TerminalWindow({ children }: Props): JSX.Element {
                 </div>
             </div>
 
-            <div className={styles.browserWindowBody}><pre>{children}</pre></div>
+            <div className={styles.browserWindowBody}>
+                <pre>{children}</pre>
+            </div>
         </div>
     );
 }

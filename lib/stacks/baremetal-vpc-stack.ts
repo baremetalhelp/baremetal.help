@@ -38,7 +38,7 @@ export class BareMetalVpcStack extends Stack {
                 },
                 {
                     cidrMask: 28,
-                    name: "rds",
+                    name: "database",
                     subnetType: SubnetType.PRIVATE_ISOLATED,
                 },
             ],

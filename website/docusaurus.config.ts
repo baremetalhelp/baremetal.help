@@ -18,8 +18,8 @@ const config = {
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
     favicon: "img/favicon.ico",
-    organizationName: "baremetalhelp", 
-    projectName: "baremetal.help", 
+    organizationName: "baremetalhelp",
+    projectName: "baremetal.help",
     trailingSlash: false,
 
     presets: [

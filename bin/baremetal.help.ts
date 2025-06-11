@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 import { App, Environment } from "aws-cdk-lib";
-import {
-    DNS_TXT_RECORDS as dnsTxtRecords,
-    COMMON_TAGS as tags,
-} from "../config";
+import { COMMON_TAGS as tags } from "../config";
 import {
     BareMetalBatchStack,
     BareMetalCdnStack,
@@ -51,7 +48,6 @@ new BareMetalGitHubPagesStack(app, "BareMetalGitHubPages", {
     env,
     tags,
     domainName,
-    subDomainName: "abcdef",
     gitHubUser: "baremetalhelp",
 });
 
@@ -72,14 +68,17 @@ new BareMetalDnsStack(app, "BareMetalDns", {
     env,
     tags,
     domainName,
-    dnsTxtRecords,
+    dnsTxtRecords: {
+        foo: "bar",
+        baz: "biff",
+    },
 });
 
 const vpcStack = new BareMetalVpcStack(app, "BareMetalVpc", {
     env,
     tags,
     vpcName,
-    maxAzs: 4,
+    maxAzs: 3,
     natGateways: 1,
 });
 const { vpc } = vpcStack;

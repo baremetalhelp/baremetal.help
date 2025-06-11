@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# SSO Landing Zone 
+# SSO Landing Zone
 
 :::warning This page has multiple issues.
 
@@ -10,13 +10,13 @@ sidebar_position: 3
 - [ ] Get the configuration and constants correct and in the correct location
 - [ ] It does not describe the what the landing zone is and how to make it very well.
 - [ ] There's no help for resolving common issues.
-:::
+      :::
 
 Single Sign-On provides a way to associate users and groups in the enterprise. Usually, this delegates to something like Active Directory.
 
 But there's another piece that must be implemented that lets users see accounts and permissions for groups they're in once they sign on. This is done with [AWS Permission Sets](https://docs.aws.amazon.com/singlesignon/latest/userguide/permissionsetsconcept.html). That's what you're going to do now.
 
-Unless you do this bit, users will be able to log in using SSO just fine, but they won't see any available accounts when they do. 
+Unless you do this bit, users will be able to log in using SSO just fine, but they won't see any available accounts when they do.
 
 Here's how the different entities are related. Looks complicated, but follow it through anyway. ✅ resources are done. 🛠 is what you're making.
 
@@ -45,6 +45,7 @@ stateDiagram-v2
 See the general assumptions in "About BareMetal tutorials".
 
 In addition
+
 1. You have set up a [BareMetal AWS Organization](../enterprise/organization)
 2. You have created some accounts in the organization
 3. You have SSO integration ready because you [followed the instructions](../enterprise/sso/follow-instructions) or [looked at the pictures](../enterprise/sso/sso-picture-book)
@@ -60,6 +61,7 @@ A big advantage of making this part data driven is that since we're using TypeSc
 The configuration file ig `landing-zone-config.ts` [link].
 
 In summary, you'll
+
 1. Make a list of AWS Accounts
 2. Make a list of SSO Groups
 3. Define AWS Permission Sets that grant SSO Users in SSO Groups permissions in AWS Accounts
@@ -73,7 +75,7 @@ Open the AWS SSO Console.
 Click "Settings".
 
 Copy the value of the SSO ARN.
-::: 
+:::
 
 ![](images/copy-sso-arn.png)
 
@@ -139,7 +141,7 @@ export interface PermissionSetConfig {
     // Optional list of the name (not ARNs) of the AWS Managed Policies this Permission Set uses
     //
     awsManagedPolicyNames?: string[];
-    
+
     // Option custom policies
     //
     inlinePolicyStatements?: PolicyStatement[];
@@ -161,7 +163,7 @@ export const adminPermissionSetConfig: PermissionSetConfig = {
 
 In the above, the `inlinePolicy` was omitted. We'll make a Permission Set in a bit that has an inline policy so you can see what that's about.
 
-Define as many of these as you have roles, job functions, or however else you plan to administer and control access. 
+Define as many of these as you have roles, job functions, or however else you plan to administer and control access.
 
 ## Now Glue Everything Together
 
@@ -225,14 +227,16 @@ And `permissionSetConfig` is the permissions you defined previously. You can def
 Let's do a diff to see what's going on.
 
 :::info action
+
 ```bash
 cdk --profile baremetal.help diff BareMetalLandingZone
 ```
+
 :::
 
 ```
-[+] AWS::SSO::PermissionSet SRE SRE 
-[+] AWS::SSO::Assignment assignment_825617765789_90674777ee-7d026bff-6189-4057-8a8e-fc5e79c39742 assignment82561776578990674777ee7d026bff618940578a8efc5e79c39742 
+[+] AWS::SSO::PermissionSet SRE SRE
+[+] AWS::SSO::Assignment assignment_825617765789_90674777ee-7d026bff-6189-4057-8a8e-fc5e79c39742 assignment82561776578990674777ee7d026bff618940578a8efc5e79c39742
 [+] AWS::SSO::Assignment assignment_772866064453_90674777ee-7d026bff-6189-4057-8a8e-fc5e79c39742 assignment77286606445390674777ee7d026bff618940578a8efc5e
 ```
 
@@ -241,15 +245,17 @@ We're creating some `AWS::SSO::PermissionSet` resources for `SRE` and the other 
 ### Looks good: deploy!
 
 :::info action
+
 ```bash
 cdk --profile baremetal.help deploy BareMetalLandingZone
 ```
+
 :::
 
 It should go something like this
 
 ```bash
-❯ cdk --profile baremetal.help deploy BareMetalLandingZone                                                                               
+❯ cdk --profile baremetal.help deploy BareMetalLandingZone
 
 ✨  Synthesis time: 7.28s
 
@@ -337,7 +343,7 @@ Copy the "User portal URL".
 
 Open that URL, probably in an incognito window because we're going to try logging in as different users.
 
-Enter the log in credentials of one of our SSO Users. 
+Enter the log in credentials of one of our SSO Users.
 :::
 
 ![](images/microsoft-sso-login.png)
@@ -365,7 +371,7 @@ Click "Skip for now" only if you're building a Landing Zone as a toy.
 :::
 
 :::info action
-Follow the MFA setup. 
+Follow the MFA setup.
 
 Log in with user and new password.
 
@@ -429,7 +435,7 @@ It's really good practice to make groups mean the same thing on each account the
 ## Using Roles and Permissions
 
 :::info action
-Click "Management console" next to `SRE` in any account. This Permission Set has admin  rights.
+Click "Management console" next to `SRE` in any account. This Permission Set has admin rights.
 :::
 
 As admin, you should be able to do pretty much everything in an account. We'll start small and create an S3 bucket.
@@ -473,9 +479,8 @@ So even though you created the bucket as Annie, once you're in a more restrictiv
 We created an enterprise-grade landing zone.
 
 We tried logging in as a user with two different roles, and we saw that the permissions were different for each
-role.  
+role.
 
 ---
 
-[^1] Perhaps we could have used numbers here, but we're not sure how good AWS is at not starting account numbers with `0`.
-
+[^1]: Perhaps we could have used numbers here, but we're not sure how good AWS is at not starting account numbers with `0`.

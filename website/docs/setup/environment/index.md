@@ -28,7 +28,7 @@ While you may not need to know everything about the tools like TypeScript and th
 
 ## Quick Start
 
-If you've done something like this before, here are the basics. Each tutorial relies on at least these. Additional requirements are listed in each tutorial as needed. 
+If you've done something like this before, here are the basics. Each tutorial relies on at least these. Additional requirements are listed in each tutorial as needed.
 
 1. You have an AWS account and have [created a privileged IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html), `baremetal`.
 2. You have created credentials for the `baremetal` user and have [stored them on your computer](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
@@ -41,7 +41,7 @@ So the quick start was a bit ambitious. Try this instead.
 
 ### Install the Tools with a Package Manger
 
-You have a couple of good options. You can use a package manager or install by hand. We recommend a package manager and the one we use is  [`homebrew`](https://brew.sh/).
+You have a couple of good options. You can use a package manager or install by hand. We recommend a package manager and the one we use is [`homebrew`](https://brew.sh/).
 
 #### Using `homebrew`
 
@@ -71,9 +71,9 @@ Install [AWS Cloud Development Kit, CDK CLI](https://docs.aws.amazon.com/cdk/v2/
 
 ## Prepare your Environment
 
-You will need to access AWS accounts with the AWS CLI. 
+You will need to access AWS accounts with the AWS CLI.
 
-There are lots of ways to configure the AWS CLI and the right credentials. Lots! The easiest way to do this is the method using long-term credentials. Long-term credentials are not recommended for the long term. We will show you more secure and robust ways as we develop a better foundation for identity. 
+There are lots of ways to configure the AWS CLI and the right credentials. Lots! The easiest way to do this is the method using long-term credentials. Long-term credentials are not recommended for the long term. We will show you more secure and robust ways as we develop a better foundation for identity.
 
 If you want a simple version, follow the version that follows with the exact screenshots and clicks you need.
 
@@ -121,6 +121,7 @@ AWS Secret Access Key [None]: ABC-super-secret-XYZ
 Default region name [None]: us-east-1
 Default output format [None]: json
 ```
+
 :::
 
 This will store credentials in a file `~/.aws/credentials`, which you can verify as follows.
@@ -157,6 +158,7 @@ aws s3 ls
 ### Why didn't that Work?
 
 Some things to look for
+
 - You did not create an `baremetal` user
 - You did not create CLI access keys for the `baremetal` user
 - You did not initialize the AWS CLI with access keys for the `baremetal` user

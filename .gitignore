@@ -9,3 +9,14 @@ cdk.out
 # *.js
 
 cdk.context.json
+
+bin/**/*.js
+bin/**/*.d.ts
+config/**/*.js
+config/**/*.d.ts
+lib/**/*.js
+lib/**/*.d.ts
+test/**/*.js
+test/**/*.d.ts
+website/**/*.js
+website/**/*.d.ts

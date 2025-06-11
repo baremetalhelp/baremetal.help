@@ -23,7 +23,7 @@ export class BareMetalBatchStack extends Stack {
             {
                 vpc,
                 spot: true,
-            }
+            },
         );
 
         const lowPriorityQueue = new JobQueue(this, "low-priority-job-queue", {
@@ -34,7 +34,7 @@ export class BareMetalBatchStack extends Stack {
             "high-priority-job-queue",
             {
                 priority: 10,
-            }
+            },
         );
         lowPriorityQueue.addComputeEnvironment(computeEnvironment, 1);
         highPriorityQueue.addComputeEnvironment(computeEnvironment, 1);

@@ -1,11 +1,11 @@
 ---
 name: Feature request
 about: Suggest new functionality for this project.
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
+
 **Thank you in advance for helping us to improve this library!** Your attention to detail here is greatly appreciated and will help us respond as quickly as possible. For general support or usage questions, use email support@baremetal.help. To avoid duplicates, please search existing Issues before submitting one here.
 
 By submitting an Issue to this repository, you agree to the terms within the [Code of Conduct](./CODE-OF-CONDUCT.md).

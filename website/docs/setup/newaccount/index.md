@@ -14,11 +14,11 @@ Creating a new AWS account is easy. Setting it up for best practices like securi
 As mentioned, this part's easy. Follow the instructions in [Sign up for AWS](https://signin.aws.amazon.com/signup?request_type=register). Remember the email address you provided and if you see it, jot down the AWS account number. This new account comes with a generous [Free Tier](https://aws.amazon.com/free). You will still need a credit card.
 
 :::warning Delete resources when you're finished with them!
-You can create virtual compute resources, EC2, in the free tier. But that only applies to certain sizes and then only for a limited number of hours in a month. 
+You can create virtual compute resources, EC2, in the free tier. But that only applies to certain sizes and then only for a limited number of hours in a month.
 
-__If you create an instance or other resource, please make sure you delete it when you're finished. You will incur charges if you leave them running, even if you don't use them.__
+**If you create an instance or other resource, please make sure you delete it when you're finished. You will incur charges if you leave them running, even if you don't use them.**
 
-S3 buckets are practically free, even for buckets with a lot of objects. But archiving unused S3 objects to deep storage incurs a per-object charge. So it pays to study the cost structure of how AWS changes for things. 
+S3 buckets are practically free, even for buckets with a lot of objects. But archiving unused S3 objects to deep storage incurs a per-object charge. So it pays to study the cost structure of how AWS changes for things.
 
 No, seriously, delete unused resources. Do it now, while you're thinking of it.
 :::
@@ -32,7 +32,7 @@ You generally won't use the root user for anything after the original set up. Sp
 
 Simply just having these credentials stored anywhere is a significant threat and will allow an attacker to take over your whole account if they compromise your laptop.
 
-We'll shortly set up a privileged user, and that will required root access to the console only. 
+We'll shortly set up a privileged user, and that will required root access to the console only.
 :::
 
 ## Assign the root user MFA, Multi-Factor Authentication
@@ -40,12 +40,12 @@ We'll shortly set up a privileged user, and that will required root access to th
 Once you have logged in as the root user, the very first thing to do is to assign MFA. This is true for all accounts, but setting it for root is critical. If you have a hardware MFA, all the better. But software MFAs are almost as good [^bitwarden].
 
 :::info action
-Once you're logged in, from the top-right menu in the AWS console click "Security credentials" for the root user. 
+Once you're logged in, from the top-right menu in the AWS console click "Security credentials" for the root user.
 
 <img src={SecurityCredentials} width="400px"/>
 :::
 
-You'll see "My security credentials" for the root user. 
+You'll see "My security credentials" for the root user.
 
 :::info action
 Click "Assign MFA device" and follow along.
@@ -60,7 +60,7 @@ Here's what a successfully-assigned MFA device looks like.
 :::info action
 Click "Sign out" from the top-right menu in the AWS console. <img src={SignOut} width="400px"/>
 
-Then log back in as the root user. This time, the console will prompt for the MFA. [^sequoia] <img src={MFA} width="400px"/> 
+Then log back in as the root user. This time, the console will prompt for the MFA. [^sequoia] <img src={MFA} width="400px"/>
 :::
 
 :::warning security
@@ -141,7 +141,7 @@ We're going to create a privileged user so we don't have to log in as the root u
 Log in as the root user if needed. With any luck, this will be the last time in a while you'll be logging in as root.
 :::
 
-You have a lot of options for creating a privileged IAM user. It's confusing, especially if you're new to this. [Authentication and access credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-authentication.html) takes you down that rabbit hole. 
+You have a lot of options for creating a privileged IAM user. It's confusing, especially if you're new to this. [Authentication and access credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-authentication.html) takes you down that rabbit hole.
 
 Or you can follow this short version.
 
@@ -169,21 +169,21 @@ When you complete the create user UI, this is what you see.
 
 ![](./images/create-user-complete.png)
 
-## Log in and secure the `baremetal` user 
+## Log in and secure the `baremetal` user
 
 We got a temporary password, which we will have to change on first login. Let's do that and set up MFA at the same time.
 
 :::info action
-Log in as `baremetal` [via the AWS Console](https://aws.amazon.com/console/). 
+Log in as `baremetal` [via the AWS Console](https://aws.amazon.com/console/).
 :::
 
 Or you can use Console sign-in link if you copied it. It will fill out the account number or alias. Your AWS account number is the one you wrote down when you created the account, right? If you don't know it, you can log in as the root user and see it in the top-right menu in the console.
 
-| First Login | Change Password |
-| --- | --- |
+| First Login                   | Change Password                   |
+| ----------------------------- | --------------------------------- |
 | ![](./images/first-login.png) | ![](./images/password-change.png) |
 
-Now click the IAM service console. 
+Now click the IAM service console.
 
 ![](./images/baremetal-user-iam-dashboard.png)
 
@@ -221,5 +221,7 @@ Test both. If something doesn't work, you can can remove the MFAs as the root us
 - You earned a break, because now stuff gets real as we start to build out the account.
 
 [^bitwarden]: We use [Bitwarden](https://bitwarden.com). We're not sponsored, endorsed, or supported by Bitwarden. We just like the application.
+
 [^sequoia]: If you're a Mac person, you're probably on macOS Sequoia. The new Passwords app is great for a software MFA, passkeys, and so on.
+
 [^explainpoweruseracess]: The AWS-managed IAM policy `PowerUserAccess` allows full access for all services, except IAM, account, and Organization. We don't need permissions for the last two, but definitely need IAM access. Hence we add `IAMFullAccess`.

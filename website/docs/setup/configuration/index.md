@@ -1,10 +1,10 @@
-# Configure your Enterprise
+# Configure Your Enterprise
 
 You have an AWS Account and a privileged, secure user, `baremetal`.
 
 You can successfully run the `aws` CLI and perform simple operations like listing nd creating S3 Buckets.
 
-Now it's time to configure how you want your enterprise to look. What's your company domain name? 
+Now it's time to configure how you want your enterprise to look. What's your company domain name?
 
 ## Shared Configuration
 
@@ -41,56 +41,50 @@ You can add whatever you like here. All stacks inherit all these tags. You can a
 There are other best-practice tags. Let's ask around.
 
 :::info ask claude!
+
 ```
 Use a consistent naming convention:
-
-Project: [project-name]
-Environment: [dev/test/staging/prod]
-Owner: [team-name or email]
+    Project: [project-name]
+    Environment: [dev/test/staging/prod]
+    Owner: [team-name or email]
 
 Include cost allocation tags:
-
-CostCenter: [cost-center-code]
-Business Unit: [business-unit-name]
+    CostCenter: [cost-center-code]
+    Business Unit: [business-unit-name]
 
 Add operational tags:
-
-CreatedBy: [username or service]
-CreatedDate: [YYYY-MM-DD]
-LastModifiedBy: [username or service]
-LastModifiedDate: [YYYY-MM-DD]
+    CreatedBy: [username or service]
+    CreatedDate: [YYYY-MM-DD]
+    LastModifiedBy: [username or service]
+    LastModifiedDate: [YYYY-MM-DD]
 
 Include compliance and security tags:
-
-Compliance: [compliance-standard]
-DataClassification: [public/confidential/restricted]
+    Compliance: [compliance-standard]
+    DataClassification: [public/confidential/restricted]
 
 Add application-specific tags:
-
-Application: [application-name]
-Version: [version-number]
+    Application: [application-name]
+    Version: [version-number]
 
 Use lifecycle management tags:
-
-TerminationDate: [YYYY-MM-DD]
-Backup: [yes/no]
+    TerminationDate: [YYYY-MM-DD]
+    Backup: [yes/no]
 
 Consider automation tags:
-
-AutoStop: [yes/no]
-AutoStart: [yes/no]
+    AutoStop: [yes/no]
+    AutoStart: [yes/no]
 
 Add stack-specific tags:
+    StackName: [stack-name]
+    StackId: [stack-id]
 
-StackName: [stack-name]
-StackId: [stack-id]
-
-Remember to use consistent capitalization and formatting for your tags. 
+Remember to use consistent capitalization and formatting for your tags.
 Also, ensure that you're following any specific tagging policies your organization may have in place.
 ```
+
 :::
 
 ## The Upshot
 
 - As the last step for getting ready to deploy BareMetal infrastructure, you declared a couple of constants specific to your enterprise that are common across all your BareMetal features.
-- You defined a robust resource tagging strategy from day one, so full attribution of resources and stacks is easily discoverable. 
+- You defined a robust resource tagging strategy from day one, so full attribution of resources and stacks is easily discoverable.

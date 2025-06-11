@@ -1,1 +1,1 @@
-export * from './baremetal-certificate'
+export * from "./baremetal-certificate";

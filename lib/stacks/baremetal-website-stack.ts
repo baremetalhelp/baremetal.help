@@ -29,7 +29,7 @@ export class BareMetalWebsiteStack extends Stack {
     constructor(
         scope: Construct,
         name: string,
-        props: BareMetalWebsiteStackProps
+        props: BareMetalWebsiteStackProps,
     ) {
         super(scope, name);
 
@@ -49,8 +49,8 @@ export class BareMetalWebsiteStack extends Stack {
                 .toGetObject()
                 .on(siteBucket.arnForObjects("*"))
                 .forCanonicalUser(
-                    cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId
-                )
+                    cloudfrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId,
+                ),
         );
 
         const certificate = new Certificate(this, "SiteCertificate", {

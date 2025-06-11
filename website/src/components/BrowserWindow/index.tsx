@@ -41,7 +41,7 @@ export default function BrowserWindow({
                 <div
                     className={clsx(
                         styles.browserWindowAddressBar,
-                        "text--truncate"
+                        "text--truncate",
                     )}
                 >
                     {url}

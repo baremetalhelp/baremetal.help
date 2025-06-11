@@ -17,7 +17,7 @@ export class BareMetalLandingZoneStack extends Stack {
     constructor(
         scope: Construct,
         id: string,
-        props: BareMetalLandingZoneStackProps
+        props: BareMetalLandingZoneStackProps,
     ) {
         super(scope, id, props);
 
@@ -25,7 +25,7 @@ export class BareMetalLandingZoneStack extends Stack {
 
         if (!ssoInstanceArn) {
             throw Error(
-                "Permission Set can only be created if there's an SSO ARN in the configuration"
+                "Permission Set can only be created if there's an SSO ARN in the configuration",
             );
         }
 
@@ -33,7 +33,7 @@ export class BareMetalLandingZoneStack extends Stack {
             const permissionSet = permissionSetFromConfig(
                 this,
                 ssoInstanceArn,
-                assignment.permissionSetConfig
+                assignment.permissionSetConfig,
             );
 
             assignment.accounts.forEach((account) => {
@@ -47,18 +47,17 @@ export class BareMetalLandingZoneStack extends Stack {
                         targetId: account,
                         principalType: "GROUP",
                         principalId: assignment.group,
-                    }
+                    },
                 );
             });
         });
     }
 }
 
-
 function permissionSetFromConfig(
     scope: Construct,
     ssoInstanceArn: string,
-    permissionSetConfig: PermissionSetConfig
+    permissionSetConfig: PermissionSetConfig,
 ) {
     const { name, awsManagedPolicyNames, inlinePolicyStatements } =
         permissionSetConfig;
@@ -69,7 +68,7 @@ function permissionSetFromConfig(
         awsManagedPolicyNames?.map(
             (policyName) =>
                 ManagedPolicy.fromAwsManagedPolicyName(policyName)
-                    .managedPolicyArn
+                    .managedPolicyArn,
         ) || [];
 
     // inlinePolicy.Statement can't be an empty array, so we only add that property if it's not
@@ -84,7 +83,7 @@ function permissionSetFromConfig(
 
     if (inlinePolicyStatements && inlinePolicyStatements.length > 0) {
         const policyStatement = inlinePolicyStatements?.map((statement) =>
-            statement.toJSON()
+            statement.toJSON(),
         );
 
         policyStatementConfig = {
@@ -96,13 +95,12 @@ function permissionSetFromConfig(
     //
     const finalPermissionSetProps = Object.assign(
         permissionSetBaseProps,
-        policyStatementConfig
+        policyStatementConfig,
     );
 
     return new CfnPermissionSet(
         scope,
         permissionSetConfig.name,
-        finalPermissionSetProps
+        finalPermissionSetProps,
     );
 }
-

@@ -1,10 +1,9 @@
 ---
 name: Report an issue
 about: Create a bug report to fix an existing issue.
-title: ''
-labels: ''
-assignees: ''
-
+title: ""
+labels: ""
+assignees: ""
 ---
 
 **Thank you in advance for helping us to improve this library!** Please read through the template below and answer all relevant questions. Your additional work here is greatly appreciated and will help us respond as quickly as possible. For general support or usage questions, read the docs or contact support@baremetal.help. To duplicates, please search existing Issues before submitting one here.

@@ -1,3 +1,7 @@
+/**
+ * This CDK stack deploys
+ */
+
 import { Stack, StackProps } from "aws-cdk-lib";
 import { CfnDomain, CfnRepository } from "aws-cdk-lib/aws-codeartifact";
 import {
@@ -16,7 +20,7 @@ export class BareMetalCodeArtifactStack extends Stack {
     constructor(
         scope: Construct,
         id: string,
-        props: BareMetalCodeArtifactStackProps
+        props: BareMetalCodeArtifactStackProps,
     ) {
         super(scope, id, props);
 
@@ -42,8 +46,8 @@ export class BareMetalCodeArtifactStack extends Stack {
             permissionsPolicyDocument: domainPermissionsPolicyDocument,
         });
 
-        // // Permissions for any account in the organization
-        // //
+        // Permissions for any account in the organization
+        //
         const repositoryPermissionsPolicyDocument = new PolicyDocument({
             statements: [
                 new Statement.Codeartifact()

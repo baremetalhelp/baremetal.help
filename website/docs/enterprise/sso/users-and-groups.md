@@ -30,7 +30,7 @@ The password field here, `Secret`, does not comply with the default password req
 We did not add all the available fields. And the users we create will not have all possible attributes.
 :::
 
-## Bulk Upload Users 
+## Bulk Upload Users
 
 Open the console for your AD tenant [clarify].
 

@@ -28,7 +28,10 @@ export default function BareMetalFeatures(): JSX.Element {
                             sure everything's explained.
                         </p>
                         <p> So there is no guesswork.</p>
-                        <p>If you're stuck at any point for any reason, please email support@baremetal.help</p>
+                        <p>
+                            If you're stuck at any point for any reason, please
+                            email support@baremetal.help
+                        </p>
                     </div>
                 </div>
                 <hr />

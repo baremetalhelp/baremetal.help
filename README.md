@@ -29,7 +29,7 @@ You'll find references to awesome existing documentation for everything we build
 
 ## What You Don't Get
 
-Any applications. We let you deploy your applications on a Kubernetes or AWS' container solution ECS. We have IaC to create a shared container infrastructure if you want it. Or you can copy our code and build it yourself.  
+Any applications. We let you deploy your applications on a Kubernetes or AWS' container solution ECS. We have IaC to create a shared container infrastructure if you want it. Or you can copy our code and build it yourself.
 
 ## Navigating This Repo
 

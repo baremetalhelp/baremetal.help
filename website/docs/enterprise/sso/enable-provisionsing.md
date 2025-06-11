@@ -111,7 +111,7 @@ Here's the initial provisioning configuration.
 ![](images/provisioning-setup.png)
 
 :::info action
-Click "Start provisioning". 
+Click "Start provisioning".
 :::
 
 Nothing will happen for a bit, so put the kettle on.
@@ -142,7 +142,7 @@ Open AWS SSO console. Click "Users", then click "Groups".
 It looks like although Annie was synchronized correctly, the Administrator group did not.
 
 :::info action
-Click "Provisioning logs" and find the failure. 
+Click "Provisioning logs" and find the failure.
 :::
 
 ![](images/provisioning-logs.png)

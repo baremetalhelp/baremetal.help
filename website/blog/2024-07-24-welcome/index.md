@@ -27,7 +27,6 @@ All cloud providers have excellent documentation about individual managed servic
 
 There are gaps.
 
-While it's easy to get started with AWS — just follow [Getting Started with AWS](https://aws.amazon.com/getting-started/) — it's not so clear how to start building your enterprise after creating an AWS account and your first bucket. 
+While it's easy to get started with AWS — just follow [Getting Started with AWS](https://aws.amazon.com/getting-started/) — it's not so clear how to start building your enterprise after creating an AWS account and your first bucket.
 
 BareMetal takes you on that journey, assumes nothing, references the best AWS and third-party documentation, and gives you rock-solid, repeatable tools and scripts for creating everything you need to build your enterprise software architecture in the cloud. We use them every day. They will work for you because they work for us.
-

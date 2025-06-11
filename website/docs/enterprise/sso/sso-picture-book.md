@@ -11,6 +11,7 @@ These are the SSO integration instructions you're looking for.
 See the general assumptions in "About BareMetal tutorials". [link]
 
 In addition
+
 1. You have an [Azure account](https://azure.microsoft.com)
 2. An [Azure AD tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant) in that account and permissions to configure it.
 3. An Azure P2 trial license [link]
@@ -31,7 +32,7 @@ It may take a minute or two, but success looks like this.
 
 ![AWS SSO enabled](images/aws-sso-created.png)
 
-## Create Initial AD Tenant 
+## Create Initial AD Tenant
 
 Follow [these instructions](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant).
 
@@ -85,7 +86,7 @@ Click "Set up single sign on". Click "SAML".
 
 ![](images/ad-saml-setup.png)
 
-Leave this window open. We're doing to generate some metadata in AWS SSO that we 
+Leave this window open. We're doing to generate some metadata in AWS SSO that we
 will use to configure this.
 
 ## Download SSO Metadata from AWS
@@ -149,7 +150,7 @@ In step 3, click "Download" next to "Certificate (Base64)" to download the SAML 
 :::
 
 :::warning incomplete or broken implementation
-We could not get the Federation Metadata XML download to work. As of this writing, the upload to AWS SSO did not configure things the right way. 
+We could not get the Federation Metadata XML download to work. As of this writing, the upload to AWS SSO did not configure things the right way.
 
 It's no big deal. We just need to copy a few fields by hand.
 

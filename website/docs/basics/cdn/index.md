@@ -18,7 +18,7 @@ Edit `bin/baremetal.help.ts` in the repo root and set `domainName` to your domai
 const domainName = "baremetal.help";
 ```
 
-Deploy 
+Deploy
 
 ```shell
 cdk deploy BareMetalCdn
@@ -42,7 +42,8 @@ graph TD
 ## Assumptions
 
 In addition
-1. You registered a domain. This is not going to work without it. There are more places to register domains than you can count. Here's [how to do that on AWS](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html). Things will go much more smoothly if you use AWS as your registrar, because the CDN stack as-is will add the relevant DNS records automatically in AWS. And you need to do that to prove you own the domain you're creating the SSL certificate for. In addition, the SSL certificate requires domain validation — that you actually own the domain — which can be automated if you use AWS as your Domain Registrar. 
+
+1. You registered a domain. This is not going to work without it. There are more places to register domains than you can count. Here's [how to do that on AWS](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html). Things will go much more smoothly if you use AWS as your registrar, because the CDN stack as-is will add the relevant DNS records automatically in AWS. And you need to do that to prove you own the domain you're creating the SSL certificate for. In addition, the SSL certificate requires domain validation — that you actually own the domain — which can be automated if you use AWS as your Domain Registrar.
 2. You have content — like images and CSS — you want to serve to web applications or mobile apps. Or just some test images for now.
 
 :::note best-practice
@@ -55,7 +56,7 @@ If you just want to play with a CDN or don't have a custom domain, your best bet
 
 ## Deploy a CDN
 
-In the file `baremetal.help.ts` in the repo root, update `domainName` to a domain you own. BareMetal owns `baremetal.help`, so we'll use that one.  
+In the file `baremetal.help.ts` in the repo root, update `domainName` to a domain you own. BareMetal owns `baremetal.help`, so we'll use that one.
 
 ```ts
 const domainName = "baremetal.help";
@@ -91,7 +92,7 @@ For example, if you copied an image of Abbey Road to the root location in S3, th
 
 ![](images/beatles.png)
 
-Error messages for missing assets are XML for some reason. But at least you get a [403 HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) status. 
+Error messages for missing assets are XML for some reason. But at least you get a [403 HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) status.
 
 ![](images/cdn-403.png)
 

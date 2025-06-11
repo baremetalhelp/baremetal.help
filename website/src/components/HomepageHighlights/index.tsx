@@ -3,12 +3,12 @@ import React from "react";
 import styles from "./styles.module.css";
 
 type HighlightItem = {
-    highlight: string
+    highlight: string;
 };
 
 const HighlightList: HighlightItem[] = [
     {
-        highlight: "Deploy Docker containers with GitHub Actions"
+        highlight: "Deploy Docker containers with GitHub Actions",
     },
 ];
 

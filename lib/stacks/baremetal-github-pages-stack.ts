@@ -1,3 +1,9 @@
+/**
+ * This CDK stack creates the right DNS records in the right Route53 HostedZone to integrate GitHub Pages with the documentation site
+ *
+ * See https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages
+ */
+
 import { Stack, StackProps } from "aws-cdk-lib";
 import {
     ARecord,
@@ -7,7 +13,7 @@ import {
 } from "aws-cdk-lib/aws-route53";
 import { Construct } from "constructs";
 
-// Well-know IP addresses git GitHub Pages
+// Well-known IP addresses for GitHub Pages
 //
 const GITHUB_PAGES_IP_ADDRESSES = [
     "185.199.108.153",
@@ -18,7 +24,6 @@ const GITHUB_PAGES_IP_ADDRESSES = [
 
 export interface BareMetalGitHubPagesStackProps extends StackProps {
     domainName: string;
-    subDomainName?: string;
     gitHubUser: string;
 }
 
@@ -26,29 +31,25 @@ export class BareMetalGitHubPagesStack extends Stack {
     constructor(
         scope: Construct,
         id: string,
-        props: BareMetalGitHubPagesStackProps
+        props: BareMetalGitHubPagesStackProps,
     ) {
         super(scope, id, props);
 
-        const { domainName, subDomainName, gitHubUser } = props;
-
-        const recordName = subDomainName
-            ? `${subDomainName}.${domainName}`
-            : domainName;
+        const { domainName, gitHubUser } = props;
 
         if (!domainName || !gitHubUser) {
             throw Error(
-                "Documentation website requires both a domain and a GitHub user"
+                "Documentation website requires both a domain and a GitHub user",
             );
         }
 
-        const zone = HostedZone.fromLookup(this, "hostedzone", {
+        const zone = HostedZone.fromLookup(this, "hosted-zone", {
             domainName,
         });
 
         const alias = new ARecord(this, "alias", {
             zone,
-            recordName,
+            recordName: domainName,
             target: RecordTarget.fromIpAddresses(...GITHUB_PAGES_IP_ADDRESSES),
         });
 
